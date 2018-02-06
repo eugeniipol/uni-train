@@ -1,0 +1,16 @@
+[master 1556f9a] add task1/status.txt
+ 1 file changed, 20 insertions(+)
+ create mode 100644 task1/status.txt
+
+C:\Users\user\Desktop\Учебная практика> git log
+commit 1556f9a502a12197772b5ab58a102803d9164d3d (HEAD -> master)
+Author: Eugene <eugeniipol@gmail.com>
+Date:   Tue Feb 6 21:42:12 2018 +0300
+
+    add task1/status.txt
+
+commit 7a504823456b2220fe1b70a2b4fe92b5280537e4
+Author: Eugene <eugeniipol@gmail.com>
+Date:   Tue Feb 6 21:39:25 2018 +0300
+
+    add .gitignore
