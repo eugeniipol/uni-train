@@ -1,0 +1,218 @@
+body.other
+{
+	margin: 0px;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+}
+div.header{
+	position: relative;
+	height: 210px;
+	width: 100%;
+	background: url(header.jpg);
+	background-size: cover;
+}
+div.account{
+	position: relative;
+	float: left;
+	width: 10%;
+	left: 35%;
+	top: 35%;
+}
+div.button1{
+	position: relative;
+	float: left;
+	width: 10%;
+	left: 37%;
+	top: 53%;
+}
+div.button2{
+	position: relative;
+	float: left;
+	width: 8%;
+	height: 10%;
+	left: 22%;
+	top: 20%;
+}
+div.filterbar{
+	position: relative;
+	height: 200px;
+	background: url(backgroud.jpg);
+}
+div.footer{
+	height: 100px;
+	background: white;
+	border-top: 2px black;
+}
+div.footertext{
+	position: relative;
+	float: left;
+	top: 40%;
+	left: 20%;
+}
+div.list{
+	background: blue;
+	position: relative;
+	float: left;
+	left: 15%;
+	top: 15%;
+}
+div.list2{
+	background: blue;
+	position: relative;
+	float: left;
+	left: 17%;
+	top: 15%;
+}
+div.list3{
+	background: blue;
+	position: relative;
+	float: left;
+	left: 19%;
+	top: 15%;
+}
+div.input{
+	position: relative;
+	float: left;
+	top: 43%;
+	left: -46%;
+}
+div.input1{
+	position: relative;
+	float: left;
+	top: 43%;
+	left: -44%;
+}
+div.input2{
+	position: relative;
+	float: left;
+	top: 43%;
+	left: -43%;
+}
+div.input3{
+	position: relative;
+	float: left;
+	top: 43%;
+	left: -42%;
+}
+div.input4{
+	position: relative;
+	float: left;
+	top: 33%;
+	left: 1%;
+}
+div.hashtag{
+	color: blue;
+	font-size: large;
+	float: left;
+	position: relative;
+	top: 53%;
+	left: -4%;
+}
+div.hashtag1{
+	color: blue;
+	font-size: large;
+	float: left;
+	position: relative;
+	top: 65%;
+	left: -8%;
+}
+div.post{
+	padding-top: 10%;
+	position: relative;
+	height: 700px;
+	background: url(backgroud.jpg);
+}
+div.name{
+	position: relative;
+	width: 60%;
+	left: 35%;
+	font-size: 22px;
+	font-family: "Сomic Sans MS" Cursive;
+	color: #696969;
+	font-weight: bold;
+}
+div.data{
+	position: relative;
+	width: 60%;
+	left: 35%;
+	font-size: 17px;
+	color: #696969;
+}
+div.picture{
+	position: relative;
+	left: 35%;
+	width: 350px;
+	display: inline-block;
+}
+div.delete{
+	position: relative;
+	left: 35%;
+	width: 20px;
+}
+div.edit{
+	position: relative;
+	left: 38%;
+	bottom: 5%;
+	width: 20px;
+}
+div.like{
+	position: relative;
+	left: 62%;
+	bottom: 10%;
+	width: 120px;
+}
+div.text{
+	position: relative;
+	width: 65%;
+	left: 35%;
+	bottom: 8%;
+	color: #696969;
+	font-size: 23px;
+	font-weight: bold;
+
+}
+div.posttag{
+	position: relative;
+	left: 35%;
+	width: 65%;
+	color: blue;
+	font-size: large;
+	bottom: 8%;
+}
+div.add{
+	position: relative;
+	width: 150px;
+	left:85%;
+}
+img.post{
+	width: 450px;
+}
+select.select {
+   background: white;
+   height: 34px;
+   width: 240px;
+}
+img.header{
+	height: 210px;
+	float: left;
+}
+h1.header{
+	float: left;
+	border: 2px black;
+	height: 30px;
+	color: white;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+
+}
+a.knopka {
+  color: #fff; 
+  text-decoration: none; 
+  user-select: none; 
+  background: rgb(212,75,56); 
+  padding: 7% 20% 7% 20%; 
+  outline: none;
+} 
