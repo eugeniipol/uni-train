@@ -5,6 +5,7 @@
 	<title>coolframe</title></head>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 <body class="other">
+	<script src="training.js" async></script>
 	<div class="header">
 		<div class="logo">
 		<img class="header" src="Styles/coolframe.png" alt="лого">
@@ -20,56 +21,50 @@
 		</div>
 	</div>
 	<div class="filter-bar">
-		<div class="filters" >
+	  <div class="author-filter">
 		<div class="list-name">
-        <select class="select">
-             <option>Author name</option>
-             <option>Author name(off)</option>
-         </select>
+			 <input type="checkbox" name="author" value="a2">Author<Br>
          </div>
+         <div class="input-name">
+         	<input type="text" size="12"> 
+		</div>
+     </div>
+     <div class = "data-filter">
         <div class="list-data">
-        <select class="select">
-             <option>Date </option>
-             <option>Date (off)</option>
-         </select>
+        	<input type="checkbox" name="date" value="a2">Date<Br>
          </div>
-        <div class="list-hashtag">
-        <select class="select">
-             <option>Hashtag</option>
-             <option>Hashtag(off)</option>
-         </select>
-         </div>
-         <div class="refresh-button">
-			<a class="red-button">Refresh</a>
-		</div>
-	</div>
-	<div class="filters-bottom">
-		<div class="input-name">
-              <input type="text" size="12">
-		</div>
-		<div class="input-day">
-               <input type="text" size="2">
+         <div class="input-day">
+               <input type="text" size="2"> Day
 		</div>
 		<div class="input-mounth">
-               <input type="text" size="2">
+               <input type="text" size="2"> Mounth 
 		</div>
 		<div class="input-year">
-               <input type="text" size="4">
+               <input type="text" size="4"> Year
 		</div>
-		<div class="input-hashtag">
+     </div>
+     <div class ="hashtag-filter">
+        <div class="list-hashtag">
+        	<input type="checkbox" name="hashtag" value="a2">Hashtag<Br>
+         </div>
+         <div class="input-hashtag">
                <input type="text" size="10" list ="hashtags">
                <datalist id="hashtags">
                <option value=Belarus></option>
                <option value="beauty"></option>
                </datalist>	
         </div>
-        <div class="hashtag">
-        <select class="select">
-        	<option hidden> selected</optgroup>
-             <option>beauty</option>
-             <option>Belarus</option>
-         </select>
      </div>
+     <div class="hashtag">
+		<img src="Styles/cross.png" alt = "cross" width="1.5%">
+		#beauty
+	</div>
+	<div class="hashtag">
+		<img src="Styles/cross.png" alt = "cross" width="1.5%">
+		#Belarus
+	</div>
+     <div class="refresh-button">
+	     <a class="red-button">Refresh</a>
 	</div>
 </div>
 	<div class="post">
