@@ -34,34 +34,44 @@ div.header{
 }
 .filter-bar{
 	position: relative;
-	height: 200px;
+	height: 300px;
 	background: url(Styles/backgroud.jpg);
 }
-.filters{
+.author-filter{
 	position: relative;
 	width: 100%;
 	top: 10%;
 }
+.data-filter{
+	position: relative;
+	width: 100%;
+	top: 15%;
+}
+.hashtag-filter{
+	position: relative;
+	width: 100%;
+	top: 20%;
+}
 .list-name{
 	position: relative;
 	display: inline-block;
-	left: 15%;
+	left: 5%;
 }
 .list-data{
 	position: relative;
     display: inline-block;
-	left: 30%;
+	left: 5%;
 }
 .list-hashtag{
 	position: relative;
 	display: inline-block;
-	left: 45%;
+	left: 5%;
 	top: 15%;
 }
 .refresh-button{
 	position: relative;
-	display: inline-block;
-	left: 50%;
+	left: 5%;
+	top: 30%;
 	width: 9%;
 }
 .filters-bottom{
@@ -72,35 +82,35 @@ div.header{
 .input-name{
 	position: relative;
 	display: inline-block;
-	left: 15%;
+	left: 10%;
 }
 .input-day{
 	position: relative;
 	display: inline-block;	
-	left: 25%;
+	left: 11%;
 }
 .input-mounth{
 	position: relative;
 	display: inline-block;
-	left: 28%;
+	left: 13%;
 }
 .input-year{
 	position: relative;
 	display: inline-block;
-	left: 31%;
+	left: 15%;
 }
 .input-hashtag{
 	position: relative;
 	display: inline-block;
-	left: 38%;
+	left: 9.5%;
 }
 .hashtag{
-	color: blue;
-	font-size: large;
-	display: inline-block;
 	position: relative;
-	width: 6%;
-	left: 39%;
+	width: 100%;
+	left: 5%;
+	top: 25%;
+	color: blue;
+	font-size: 140%
 }
 .post{
 	padding-top: 5%;
