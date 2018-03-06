@@ -1,4 +1,4 @@
-(function () {
+const Modul = (function () {
     var photoPosts = [{
         id: '1',
         description: 'Mirskiy castle',
@@ -178,270 +178,271 @@
             hashtags: ['evening'],
             likes: ['Vitaut', 'Vasya']
         }
-    ]
+    ];
 
-
-    function getPhotoPosts(begin, number, filterCondig) {
-        if (begin > photoPosts.length) {
-            console.log('Overflow');
-            return;
-        }
-        var newPosts = [];
-        begin = begin || 0;
-        number = number || 10;
-        var count = 0;
-        var j = 0;
-        var i = begin;
-        if (filterCondig) {
-            while (i < photoPosts.length && j < number) {
-                if (checkFilters(photoPosts[i], filterCondig)) {
+    return {
+        getPhotoPosts: function (begin, number, filterCondig) {
+            if (begin > photoPosts.length) {
+                console.log('Overflow');
+                return;
+            }
+            var newPosts = [];
+            begin = begin || 0;
+            number = number || 10;
+            var count = 0;
+            var j = 0;
+            var i = begin;
+            if (filterCondig) {
+                while (i < photoPosts.length && j < number) {
+                    if (Modul.checkFilters(photoPosts[i], filterCondig)) {
+                        var temp = {};
+                        for (var key in photoPosts[i]) {
+                            temp[key] = photoPosts[i][key];
+                        }
+                        newPosts.push(temp);
+                        j++;
+                        i++;
+                    }
+                    i++;
+                }
+            }
+            else {
+                while (i < photoPosts.length && j < number) {
                     var temp = {};
                     for (var key in photoPosts[i]) {
                         temp[key] = photoPosts[i][key];
                     }
                     newPosts.push(temp);
-                    j++;
                     i++;
+                    j++;
                 }
-                i++;
             }
-        }
-        else {
-            while (i < photoPosts.length && j < number) {
-                var temp = {};
-                for (var key in photoPosts[i]) {
-                    temp[key] = photoPosts[i][key];
+            newPosts.sort(function (a, b) {
+                a = new Date(a.createdAt);
+                b = new Date(b.createdAt);
+                return a > b ? -1 : a < b ? 1 : 0;
+            });
+            return newPosts;
+        },
+
+        checkFilters: function (element, filters) {
+            if (filters.hashtags) {
+                for (k = 0; k < filters.hashtags.length; k++) {
+                    if (element.hashtags.indexOf(filters.hashtags[k]) == -1) {
+                        return false;
+                    }
                 }
-                newPosts.push(temp);
-                i++;
-                j++;
             }
-        }
-        newPosts.sort(function (a, b) {
-            a = new Date(a.createdAt);
-            b = new Date(b.createdAt);
-            return a > b ? -1 : a < b ? 1 : 0;
-        });
-        return newPosts;
-    }
-
-
-    function checkFilters(element, filters) {
-        if (filters.hashtags) {
-            for (k = 0; k < filters.hashtags.length; k++) {
-                if (element.hashtags.indexOf(filters.hashtags[k]) == -1) {
+            if (filters.author) {
+                if (filters.author != element.author) {
                     return false;
                 }
             }
-        }
-        if (filters.author) {
-            if (filters.author != element.author) {
+            return true;
+        },
+
+
+        getPhotoPost: function (number) {
+            if (number < photoPosts.length && number >= 0) {
+                for (var i = 0; i < photoPosts.length; i++) {
+                    if (number == photoPosts[i].id) {
+                        return photoPosts[i];
+                    }
+                }
+            }
+            else {
+                console.log('Overflow!');
+                return;
+            }
+        },
+
+
+        validatePhotoPost: function (object) {
+            if (!object.id) {
+                console.log("Absent 'id' fields")
                 return false;
             }
-        }
-        return true;
-    }
+            if (!object.description) {
+                console.log("Absent 'description' field")
+                return false;
+            }
+            if (!object.author) {
+                console.log("Absent 'author' field")
+                return false;
+            }
+            if (!object.createdAt) {
+                console.log("Absent 'createdAt' field")
+                return false;
+            }
+            if (!object.hashtags) {
+                console.log("Absent 'hashtags' field")
+                return false;
+            }
+            if (!object.likes) {
+                console.log("Absent 'likes' field")
+                return false;
+            }
+            if (!object.photolink) {
+                console.log("Absent 'photolink' field")
+                return false;
+            }
+            for (var key in object) {
+                switch (key) {
+                    case 'id':
+                        if (typeof object.id !== 'string') {
+                            console.log('Wrong type!');
+                            return false;
+                        }
+                        break;
+                    case 'description':
+                        if (object.description.length > 200) {
+                            console.log('Overflow');
+                            return false;
+                        }
+                        break;
+                    case 'createdAt':
+                        if ((object.createdAt instanceof Date) == false) {
+                            console.log('Wrong type!');
+                            return false;
+                        }
+                        break;
+                    case 'photoLin':
+                        if (object.photolink.length == 0) {
+                            console.log('Empty photoLink field');
+                            return false;
+                        }
+                    case 'author':
+                        if (object.author.length == 0) {
+                            console.log('Empty author field');
+                            return false;
+                        }
+                }
+            }
+            return true;
+        },
 
 
-    function getPhotoPost(number) {
-        if (number < photoPosts.length && number >= 0) {
+        addPhotoPost: function (element) {
+            for (var k = 0; k < photoPosts.length; k++) {
+                if (photoPosts[k].id === element.id) {
+                    console.log('Element with such ID already exists');
+                    return false;
+                }
+            }
+            if (Modul.validatePhotoPost(element) == true) {
+                photoPosts.push(element);
+                return true;
+            }
+            return false;
+        },
+
+
+        editPhotoPost: function (id, object) {
             for (var i = 0; i < photoPosts.length; i++) {
-                if (number == photoPosts[i].id) {
-                    return photoPosts[i];
-                }
-            }
-        }
-        else {
-            console.log('Overflow!');
-            return;
-        }
-    }
-
-
-    function validatePhotoPost(object) {
-        if (!object.id) {
-            console.log("Absent 'id' fields")
-            return false;
-        }
-        if (!object.description) {
-            console.log("Absent 'description' field")
-            return false;
-        }
-        if (!object.author) {
-            console.log("Absent 'author' field")
-            return false;
-        }
-        if (!object.createdAt) {
-            console.log("Absent 'createdAt' field")
-            return false;
-        }
-        if (!object.hashtags) {
-            console.log("Absent 'hashtags' field")
-            return false;
-        }
-        if (!object.likes) {
-            console.log("Absent 'likes' field")
-            return false;
-        }
-        if (!object.photolink) {
-            console.log("Absent 'photolink' field")
-            return false;
-        }
-        for (var key in object) {
-            switch (key) {
-                case 'id':
-                    if (typeof object.id !== 'string') {
-                        console.log('Wrong type!');
-                        return false;
+                if (photoPosts[i].id == id) {
+                    var temp = {};
+                    for (var key in photoPosts[i]) {
+                        temp[key] = photoPosts[i][key];
                     }
-                    break;
-                case 'description':
-                    if (object.description.length > 200) {
-                        console.log('Overflow');
-                        return false;
+                    for (var key in object) {
+                        switch (key) {
+                            case 'description':
+                                temp.description = object.description;
+                                break;
+                            case 'photoLink':
+                                temp.description = object.description;
+                                break;
+                            case 'Hashtags':
+                                temp.hashtags = object.hashtags;
+                        }
                     }
-                    break;
-                case 'createdAt':
-                    if ((object.createdAt instanceof Date) == false) {
-                        console.log('Wrong type!');
-                        return false;
-                    }
-                    break;
-                case 'photoLin':
-                    if (object.photolink.length == 0) {
-                        console.log('Empty photoLink field');
-                        return false;
-                    }
-                case 'author':
-                    if (object.author.length == 0) {
-                        console.log('Empty author field');
-                        return false;
-                    }
-            }
-        }
-        return true;
-    }
-
-
-    function addPhotoPost(element) {
-        for (var k = 0; k < photoPosts.length; k++) {
-            if (photoPosts[k].id === element.id) {
-                console.log('Element with such ID already exists');
-                return false;
-            }
-        }
-        if (validatePhotoPost(element) == true) {
-            photoPosts.push(element);
-            return true;
-        }
-        return false;
-    }
-
-
-    function editPhotoPost(id, object) {
-        for (var i = 0; i < photoPosts.length; i++) {
-            if (photoPosts[i].id == id) {
-                var temp = {};
-                for (var key in photoPosts[i]) {
-                    temp[key] = photoPosts[i][key];
-                }
-                for (var key in object) {
-                    switch (key) {
-                        case 'description':
-                            temp.description = object.description;
-                            break;
-                        case 'photoLink':
-                            temp.description = object.description;
-                            break;
-                        case 'Hashtags':
-                            temp.hashtags = object.hashtags;
+                    if (Modul.validatePhotoPost(temp) == true) {
+                        photoPosts[i] = temp;
+                        return true;
                     }
                 }
-                if (validatePhotoPost(temp) == true) {
-                    photoPosts[i] = temp;
-                    return true;
-                }
             }
-        }
-        return false;
-    }
+            return false;
+        },
 
+        removePhotoPost: function (object) {
+            var idx = object - 1;
+            if (idx < photoPosts.length && idx >= 0) {
+                photoPosts.splice(idx, 1);
+                return true;
+            }
+            return false;
+        },
 
-    function removePhotoPost(object) {
-        var idx = object - 1;
-        if (idx < photoPosts.length && idx >= 0) {
-            photoPosts.splice(idx, 1);
-            return true;
-        }
-        return false;
-    }
-
+        testing: function () {
 
 //Получение новых массивов:
-    var newMassive = [];
-    var newMassiveAuthor = [];
-    var newMassiveHashAuthor = [];
-    var newShowMassive = [];
+            var newMassive = [];
+            var newMassiveAuthor = [];
+            var newMassiveHashAuthor = [];
+            var newShowMassive = [];
 //Новый массив отфильтрованый по хэштегам и автору
-    newMassiveHashAuthor = getPhotoPosts(1, 8, {hashtags: ['beauty'], author: 'Vitaut'});
-    console.log(newMassiveHashAuthor);
+            newMassiveHashAuthor = Modul.getPhotoPosts(1, 8, {hashtags: ['beauty'], author: 'Vitaut'});
+            console.log(newMassiveHashAuthor);
 //Новый массив отфильтрованый только по автору
-    newMassiveAuthor = getPhotoPosts(1, 8, {author: 'Eugeniipol'});
-    console.log(newMassiveAuthor);
+            newMassiveAuthor = Modul.getPhotoPosts(1, 8, {author: 'Eugeniipol'});
+            console.log(newMassiveAuthor);
 //Новый массив без применения фильтров
-    newMassive = getPhotoPosts(1, 8);
-    console.log(newMassive);
+            newMassive = Modul.getPhotoPosts(1, 8);
+            console.log(newMassive);
 //Создание массива эквивалентного исходному для наглядной демонстрации работы методов
-    newShowMassive = getPhotoPosts(0, 20);
-    console.log(newShowMassive);
+            newShowMassive = Modul.getPhotoPosts(0, 20);
+            console.log(newShowMassive);
 
 
 //Получение объекта по id
-    var photoPost = getPhotoPost(10);
-    console.log(photoPost);
+            var photoPost = Modul.getPhotoPost(10);
+            console.log(photoPost);
 //Выход за пределы массива
-    var falsePhotoPost = getPhotoPost(22);
-    console.log(falsePhotoPost);
+            var falsePhotoPost = Modul.getPhotoPost(22);
+            console.log(falsePhotoPost);
 
 
 //Проверка на валидность элемента
-    console.log(validatePhotoPost(photoPosts[3]));
+            console.log(Modul.validatePhotoPost(photoPosts[3]));
 //Проверка на валидность даёт отрицательный резульатат
-    console.log(validatePhotoPost((photoPosts[12])));
+            console.log(Modul.validatePhotoPost((photoPosts[12])));
 
 
 //Добавленеи объекта в массив
-    var addObject = {
-        id: '22',
-        description: 'New castle',
-        createdAt: new Date(2017, 04, 28),
-        author: 'Eugeniipol',
-        photolink: 'Pictures/Minsk.jpg',
-        hashtags: ['beauty'],
-        likes: []
-    }
-    console.log(addPhotoPost(addObject));
-    console.log(photoPosts);
+            var addObject = {
+                id: '22',
+                description: 'New castle',
+                createdAt: new Date(2017, 04, 28),
+                author: 'Eugeniipol',
+                photolink: 'Pictures/Minsk.jpg',
+                hashtags: ['beauty'],
+                likes: []
+            }
+            console.log(Modul.addPhotoPost(addObject));
+            console.log(photoPosts);
 //Объект не пройдёт проверку на валидность и добавление не произойдёт
-    var addFasleObject = {
-        id: '23',
-        description: 'Fasle object',
-        author: 'Somebody',
-        hashtags: [],
-        likes: []
-    }
-    console.log(addPhotoPost(addFasleObject));
+            var addFasleObject = {
+                id: '23',
+                description: 'Fasle object',
+                author: 'Somebody',
+                hashtags: [],
+                likes: []
+            }
+            console.log(Modul.addPhotoPost(addFasleObject));
 
 
 //Изменение фотопоста
-    console.log(editPhotoPost(2, {description: 'Hello world'}));
+            console.log(Modul.editPhotoPost(2, {description: 'Hello world'}));
 //Вывод изменённого элемента(в скопированных в самом начале массивах, объект c id = 2 имеет другое описание)
-    console.log(photoPosts[1]);
+            console.log(photoPosts[1]);
 
 
 //Удаление фотопоста(в скопированном в самом начале массиве, элемент с таким id существует)
-    removePhotoPost(5);
-    console.log(photoPosts);
+            Modul.removePhotoPost(5);
+            console.log(photoPosts);
+        }
+    }
 })();
 
 
