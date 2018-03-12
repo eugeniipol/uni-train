@@ -1,6 +1,19 @@
 const DomModul = (function () {
     var ids = 21;
+    var account = prompt('Enter account name(write "null" if logged out)', 'here');
     var name = document.getElementById('account');
+    if (account !== 'null') {
+        name.textContent = account;
+    }
+    else {
+        name.textContent = '';
+        name = null;
+        var header = document.getElementById('header');
+        var logOut = document.getElementById('log');
+        var addPhoto = document.getElementById('add');
+        header.removeChild(logOut);
+        header.removeChild(addPhoto);
+    }
     len = Modul.countLength();
     var newMassive = [];
     newMassive = Modul.getPhotoPosts(0, len);
@@ -10,7 +23,7 @@ const DomModul = (function () {
         var div = createPostDom(newMassive[i].author, newMassive[i].description, newMassive[i].photolink, newMassive[i].hashtags, newMassive[i].likes, newMassive[i].createdAt, newMassive[i].id);
         nodes[i] = div;
     }
-    console.log(nodes);
+
 
     function createPostDom(author, descript, link, hashtags, likes, createdAt, id) {
         //Общий div поста
@@ -82,14 +95,8 @@ const DomModul = (function () {
         return div;
     }
 
-
     return {
-        changeAccout: function () {
-            var setName = prompt('Enter new account name', 'Vitaut');
-            name.textContent = setName;
-            DomModul.showPosts();
-        },
-
+        //Добавление нового фотопоста
         addPhotoPostDom: function (author, descript, link, hashtags, likes) {
             idst = String(ids);
             var newPost = {
@@ -101,14 +108,18 @@ const DomModul = (function () {
                 hashtags: hashtags,
                 likes: likes
             }
-            Modul.addPhotoPost(newPost);
-            var dat = new Date();
-            var div = createPostDom(author, descript, link, hashtags, likes, dat, idst);
-            nodes.unshift(div);
-            DomModul.showPosts();
-            ids++;
+            if (Modul.addPhotoPost(newPost) === true) {
+                var dat = new Date();
+                var div = createPostDom(author, descript, link, hashtags, likes, dat, idst);
+                nodes.unshift(div);
+                var filter = document.getElementById('filterBar');
+                document.body.insertBefore(div, (filter).nextSibling);
+                newMassive.unshift(newPost);
+                ids++;
+            }
         },
 
+        //Удаление поста
         deletePhotoPsotDom: function (ids) {
             Modul.removePhotoPost(ids);
             for (var i = 0; i < nodes.length; i++) {
@@ -120,36 +131,38 @@ const DomModul = (function () {
             }
         },
 
+        //Редактирование фотопоста
         editPhotoPostDom: function (id, object) {
             Modul.editPhotoPost(id, object);
-            for(var i = 0; i < nodes.length; i++){
-                if(nodes[i].getAttribute('id') === (id)){
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].getAttribute('id') === String(id)) {
                     var temp = Modul.getPhotoPost(id);
-                    var div = createPostDom(temp.author, temp.description, temp.photolink, temp.hashtags, temp.likes, temp.data);
-                    document.body.replaceChild(div,nodes[i]);
+                    var div = createPostDom(temp.author, temp.description, temp.photolink, temp.hashtags, temp.likes, temp.data, temp.id);
+                    var posts = document.getElementsByClassName('post');
+                    for (var j = 0; j < posts.length; j++) {
+                        if (posts[j].getAttribute('id') === String(id)) {
+                            document.body.replaceChild(div, posts[j]);
+                        }
+                    }
                     nodes[i] = div;
-
+                    console.log(nodes[i]);
                 }
             }
         },
 
-        showMore: function () {
-            DomModul.showPosts(10);
-        },
 
-        showPosts: function (more) {
-            var more = more || 0;
+        //Отображение постов
+        showPosts: function () {
             var authors = [];
             var list = document.getElementById('authors');
             var lists = list.children;
-            for( i = 0; i <lists.length; i++){
+            for (i = 0; i < lists.length; i++) {
                 lists[i].remove();
             }
             footer = document.getElementById('footer');
-            for (var i = 0; i < 10 + more; i++) {
-                if (nodes[i].getAttribute('delete') !== true) {
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].getAttribute('delete') !== 'true') {
                     document.body.insertBefore(nodes[i], footer);
-                    console.log(nodes[i]);
                     if (authors.indexOf(newMassive[i].author) === -1) {
                         authors.push(newMassive[i].author);
                     }
@@ -161,6 +174,22 @@ const DomModul = (function () {
                 option.setAttribute('value', authors[j]);
                 list.appendChild(option);
             }
+        },
+
+        testing: function () {
+            DomModul.showPosts();
+            console.log(nodes);
+            console.log('Удаление поса с ID 12');
+            DomModul.deletePhotoPsotDom(12);
+            console.log(nodes);
+
+            console.log('Изменение поста с id 2');
+            DomModul.editPhotoPostDom(2, {description: 'Hello world'});
+            console.log(nodes);
+
+            console.log('Добавление поста');
+            DomModul.addPhotoPostDom('Author', 'Nothing', 'Pictures/Brest.jpg',['Hello'], []);
+            console.log('nodes');
         }
     }
 })();
