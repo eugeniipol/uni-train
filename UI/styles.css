@@ -3,7 +3,7 @@ body.other
 	margin: 0px;
 	padding-top: 0px;
 	padding-left: 0px;
-	padding-right: 0px;
+	padding-right: 0%;
 	padding-bottom: 0px;
 	min-width: 800px;
 }
@@ -74,11 +74,6 @@ div.header{
 	top: 30%;
 	width: 9%;
 }
-.filters-bottom{
-	position: relative;
-	width: 100%;
-	top: 20%; 
-}
 .input-name{
 	position: relative;
 	display: inline-block;
@@ -106,7 +101,7 @@ div.header{
 }
 .hashtag{
 	position: relative;
-	width: 100%;
+	width: 95%;
 	left: 5%;
 	top: 25%;
 	color: blue;
@@ -198,7 +193,15 @@ div.header{
 	top: 40%;
 	left: 20%;
 }
-img.post{
+.alert {
+  padding: 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 4px;
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+
+img.post-photo{
 	width: 65%;
 }
 select.select {
