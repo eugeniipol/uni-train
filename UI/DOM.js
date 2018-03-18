@@ -9,10 +9,10 @@ const DomModul = (function () {
         name.textContent = '';
         name = null;
         var header = document.getElementById('header');
-        var logOut = document.getElementById('log');
+        var logOut = document.getElementById('logText');
         var addPhoto = document.getElementById('add');
-        header.removeChild(logOut);
         header.removeChild(addPhoto);
+        logOut.textContent = "Log in";
     }
     len = Modul.countLength();
     var newMassive = [];
