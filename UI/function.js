@@ -239,9 +239,9 @@ const Modul = (function () {
                 }
             }
             newPosts.sort(function (a, b) {
-                a = new Date(a.createdAt);
-                b = new Date(b.createdAt);
-                return a > b ? -1 : a < b ? 1 : 0;
+                aDate = new Date(a.createdAt);
+                bDate = new Date(b.createdAt);
+                return aDate > bDate ? -1 : aDate < bDate ? 1 : 0;
             });
             return newPosts;
         },
@@ -249,13 +249,13 @@ const Modul = (function () {
         checkFilters: function (element, filters) {
             if (filters.hashtags) {
                 for (k = 0; k < filters.hashtags.length; k++) {
-                    if (element.hashtags.indexOf(filters.hashtags[k]) == -1) {
+                    if (element.hashtags.indexOf(filters.hashtags[k]) === -1) {
                         return false;
                     }
                 }
             }
             if (filters.author) {
-                if (filters.author != element.author) {
+                if (filters.author !== element.author) {
                     return false;
                 }
             }
@@ -322,18 +322,18 @@ const Modul = (function () {
                         }
                         break;
                     case 'createdAt':
-                        if ((object.createdAt instanceof Date) == false) {
+                        if ((object.createdAt instanceof Date) === false) {
                             console.log('Wrong type!');
                             return false;
                         }
                         break;
                     case 'photoLin':
-                        if (object.photolink.length == 0) {
+                        if (object.photolink.length === 0) {
                             console.log('Empty photoLink field');
                             return false;
                         }
                     case 'author':
-                        if (object.author.length == 0) {
+                        if (object.author.length === 0) {
                             console.log('Empty author field');
                             return false;
                         }
@@ -359,13 +359,14 @@ const Modul = (function () {
 
 
         editPhotoPost: function (id, object) {
-            for (var i = 0; i < photoPosts.length; i++) {
-                if (photoPosts[i].id == id) {
-                    var temp = {};
-                    for (var key in photoPosts[i]) {
-                        temp[key] = photoPosts[i][key];
+            let success = false;
+            let requested = photoPosts.find(function (element, index, array) {
+                if (element.id === String(id)) {
+                    let temp = {};
+                    for (let key in element) {
+                        temp[key] = element[key];
                     }
-                    for (var key in object) {
+                    for (let key in object) {
                         switch (key) {
                             case 'description':
                                 temp.description = object.description;
@@ -377,13 +378,13 @@ const Modul = (function () {
                                 temp.hashtags = object.hashtags;
                         }
                     }
-                    if (Modul.validatePhotoPost(temp) == true) {
-                        photoPosts[i] = temp;
-                        return true;
+                    if (Modul.validatePhotoPost(temp) === true) {
+                        photoPosts[index] = temp;
+                        success = true;
                     }
                 }
-            }
-            return false;
+            });
+            return success;
         },
 
         removePhotoPost: function (object) {
