@@ -1,8 +1,8 @@
 const Modul = (function () {
-    var photoPosts = [{
+    let photoPosts = [{
         id: '1',
         description: 'Mirskiy castle',
-        createdAt: new Date(2016, 05, 4),
+        createdAt: new Date(2016, 5, 4),
         author: 'Vitaut',
         photolink: 'Pictures/castle.jpg',
         hashtags: ['beauty', 'Belarus'],
@@ -11,7 +11,7 @@ const Modul = (function () {
         {
             id: '2',
             description: 'Bizon',
-            createdAt: new Date(2016, 03, 4),
+            createdAt: new Date(2016, 3, 4),
             author: 'Vasya',
             photolink: 'Pictures/bison.jpg',
             hashtags: ['beauty', 'Belarus'],
@@ -29,7 +29,7 @@ const Modul = (function () {
         {
             id: '4',
             description: 'Nesvizhskiy castle',
-            createdAt: new Date(2018, 01, 14),
+            createdAt: new Date(2018, 1, 14),
             author: 'Vitaut',
             photolink: 'Pictures/Nesvizh.png',
             hashtags: ['beauty', 'Belarus'],
@@ -38,7 +38,7 @@ const Modul = (function () {
         {
             id: '5',
             description: 'Homel',
-            createdAt: new Date(2014, 03, 09),
+            createdAt: new Date(2014, 3, 9),
             author: 'Vitaut',
             photolink: 'Pictures/Homel.jpg',
             hashtags: ['Belarus'],
@@ -47,7 +47,7 @@ const Modul = (function () {
         {
             id: '6',
             description: 'Vitebsk',
-            createdAt: new Date(2017, 05, 9),
+            createdAt: new Date(2017, 5, 9),
             author: 'Eugeniipol',
             photolink: 'Pictures/Vitebsk.jpg',
             hashtags: ['beauty', 'Belarus'],
@@ -65,7 +65,7 @@ const Modul = (function () {
         {
             id: '8',
             description: 'Brest',
-            createdAt: new Date(2016, 05, 13),
+            createdAt: new Date(2016, 5, 13),
             author: 'Vitaut',
             photolink: 'Pictures/Brest.jpg',
             hashtags: ['beauty', 'Belarus'],
@@ -74,7 +74,7 @@ const Modul = (function () {
         {
             id: '9',
             description: 'Mogilev',
-            createdAt: new Date(2016, 05, 14),
+            createdAt: new Date(2016, 5, 14),
             author: 'Vasya',
             photolink: 'Pictures/Mogilev.jpg',
             hashtags: ['beauty', 'Belarus'],
@@ -83,7 +83,7 @@ const Modul = (function () {
         {
             id: '10',
             description: 'Minsk',
-            createdAt: new Date(2016, 05, 16),
+            createdAt: new Date(2016, 5, 16),
             author: 'Eugeniipol',
             photolink: 'Pictures/Minsk.jpg',
             hashtags: ['beauty', 'Belarus'],
@@ -92,7 +92,7 @@ const Modul = (function () {
         {
             id: '11',
             description: 'Mir',
-            createdAt: new Date(2016, 01, 4),
+            createdAt: new Date(2016, 1, 4),
             author: 'Vasya',
             photolink: 'Pictures/castle.jpg',
             hashtags: [],
@@ -101,7 +101,7 @@ const Modul = (function () {
         {
             id: '12',
             description: 'Zubr',
-            createdAt: new Date(2017, 08, 04),
+            createdAt: new Date(2017, 8, 4),
             author: 'Vitaut',
             photolink: 'Pictures/bison.jpg',
             hashtags: ['beauty'],
@@ -110,7 +110,7 @@ const Modul = (function () {
         {
             id: '13',
             description: 'Old city',
-            createdAt: new Date(2018, 01, 04),
+            createdAt: new Date(2018, 1, 4),
             author: 'Eugeniipol',
             hashtags: ['Belarus'],
             likes: []
@@ -118,7 +118,7 @@ const Modul = (function () {
         {
             id: '14',
             description: 'Nesvizh',
-            createdAt: new Date(2018, 01, 14),
+            createdAt: new Date(2018, 1, 14),
             author: 'Vitaut',
             photolink: 'Pictures/Nesvizh.png',
             hashtags: [],
@@ -136,7 +136,7 @@ const Modul = (function () {
         {
             id: '16',
             description: 'Hills',
-            createdAt: new Date(2013, 07, 23),
+            createdAt: new Date(2013, 7, 23),
             author: 'Eugeniipol',
             photolink: 'Pictures/Vitebsk.jpg',
             hashtags: ['beauty'],
@@ -154,7 +154,7 @@ const Modul = (function () {
         {
             id: '18',
             description: 'Sovietskaya street',
-            createdAt: new Date(2017, 08, 14),
+            createdAt: new Date(2017, 8, 14),
             author: 'Vitaut',
             photolink: 'Pictures/Brest.jpg',
             hashtags: ['Belarus'],
@@ -172,7 +172,7 @@ const Modul = (function () {
         {
             id: '20',
             description: 'Big city life',
-            createdAt: new Date(2017, 06, 06),
+            createdAt: new Date(2017, 6, 6),
             author: 'Eugeniipol',
             photolink: 'Pictures/Minsk.jpg',
             hashtags: ['evening'],
@@ -180,61 +180,57 @@ const Modul = (function () {
         }
     ];
 
+
     return {
-        getPhotoPosts: function (begin, number, filterCondig) {
+        getPhotoPosts: function (begin, number, filterConfig) {
             if (begin > photoPosts.length) {
                 console.log('Overflow');
                 return;
             }
-            var newPosts = [];
-            begin = begin || 0;
-            number = number || 10;
-            var count = 0;
-            var j = 0;
-            var i = begin;
-            if (filterCondig) {
-                while (i < photoPosts.length && j < number) {
-                    if (Modul.checkFilters(photoPosts[i], filterCondig)) {
-                        var temp = {};
-                        for (var key in photoPosts[i]) {
-                            temp[key] = photoPosts[i][key];
-                        }
-                        newPosts.push(temp);
-                        j++;
-                        i++;
-                    }
-                    i++;
-                }
+            let config;
+            if(filterConfig === undefined){
+                config = "empty";
             }
             else {
-                while (i < photoPosts.length && j < number) {
-                    var temp = {};
-                    for (var key in photoPosts[i]) {
+                config = filterConfig;
+            }
+            let newPosts = [];
+            begin = begin || 0;
+            number = number || 10;
+            let count = 0;
+            let j = 0;
+            let i = begin;
+            while (i < photoPosts.length && j < number) {
+                if (Modul.checkFilters(photoPosts[i], config)) {
+                    let temp = {};
+                    for (let key in photoPosts[i]) {
                         temp[key] = photoPosts[i][key];
                     }
                     newPosts.push(temp);
-                    i++;
                     j++;
+                    i++;
                 }
+                i++;
             }
             newPosts.sort(function (a, b) {
-                a = new Date(a.createdAt);
-                b = new Date(b.createdAt);
-                return a > b ? -1 : a < b ? 1 : 0;
+                aDate = new Date(a.createdAt);
+                bDate = new Date(b.createdAt);
+                return aDate > bDate ? -1 : aDate < bDate ? 1 : 0;
             });
             return newPosts;
         },
 
+
         checkFilters: function (element, filters) {
             if (filters.hashtags) {
                 for (k = 0; k < filters.hashtags.length; k++) {
-                    if (element.hashtags.indexOf(filters.hashtags[k]) == -1) {
+                    if (element.hashtags.indexOf(filters.hashtags[k]) === -1) {
                         return false;
                     }
                 }
             }
             if (filters.author) {
-                if (filters.author != element.author) {
+                if (filters.author !== element.author) {
                     return false;
                 }
             }
@@ -244,7 +240,7 @@ const Modul = (function () {
 
         getPhotoPost: function (number) {
             if (number < photoPosts.length && number >= 0) {
-                for (var i = 0; i < photoPosts.length; i++) {
+                for (let i = 0; i < photoPosts.length; i++) {
                     if (number == photoPosts[i].id) {
                         return photoPosts[i];
                     }
@@ -301,18 +297,18 @@ const Modul = (function () {
                         }
                         break;
                     case 'createdAt':
-                        if ((object.createdAt instanceof Date) == false) {
+                        if ((object.createdAt instanceof Date) === false) {
                             console.log('Wrong type!');
                             return false;
                         }
                         break;
                     case 'photoLin':
-                        if (object.photolink.length == 0) {
+                        if (object.photolink.length === 0) {
                             console.log('Empty photoLink field');
                             return false;
                         }
                     case 'author':
-                        if (object.author.length == 0) {
+                        if (object.author.length === 0) {
                             console.log('Empty author field');
                             return false;
                         }
@@ -323,13 +319,13 @@ const Modul = (function () {
 
 
         addPhotoPost: function (element) {
-            for (var k = 0; k < photoPosts.length; k++) {
+            for (let k = 0; k < photoPosts.length; k++) {
                 if (photoPosts[k].id === element.id) {
                     console.log('Element with such ID already exists');
                     return false;
                 }
             }
-            if (Modul.validatePhotoPost(element) == true) {
+            if (Modul.validatePhotoPost(element) === true) {
                 photoPosts.push(element);
                 return true;
             }
@@ -338,13 +334,14 @@ const Modul = (function () {
 
 
         editPhotoPost: function (id, object) {
-            for (var i = 0; i < photoPosts.length; i++) {
-                if (photoPosts[i].id == id) {
-                    var temp = {};
-                    for (var key in photoPosts[i]) {
-                        temp[key] = photoPosts[i][key];
+            let success = false;
+            let requested = photoPosts.find(function (element, index, array) {
+                if (element.id === String(id)) {
+                    let temp = {};
+                    for (let key in element) {
+                        temp[key] = element[key];
                     }
-                    for (var key in object) {
+                    for (let key in object) {
                         switch (key) {
                             case 'description':
                                 temp.description = object.description;
@@ -356,17 +353,17 @@ const Modul = (function () {
                                 temp.hashtags = object.hashtags;
                         }
                     }
-                    if (Modul.validatePhotoPost(temp) == true) {
-                        photoPosts[i] = temp;
-                        return true;
+                    if (Modul.validatePhotoPost(temp) === true) {
+                        photoPosts[index] = temp;
+                        success = true;
                     }
                 }
-            }
-            return false;
+            });
+            return success;
         },
 
         removePhotoPost: function (object) {
-            var idx = object - 1;
+            let idx = object - 1;
             if (idx < photoPosts.length && idx >= 0) {
                 photoPosts.splice(idx, 1);
                 return true;
@@ -410,10 +407,10 @@ const Modul = (function () {
 
 
 //Добавленеи объекта в массив
-            var addObject = {
+            let addObject = {
                 id: '22',
                 description: 'New castle',
-                createdAt: new Date(2017, 04, 28),
+                createdAt: new Date(2017, 4, 28),
                 author: 'Eugeniipol',
                 photolink: 'Pictures/Minsk.jpg',
                 hashtags: ['beauty'],
@@ -422,7 +419,7 @@ const Modul = (function () {
             console.log(Modul.addPhotoPost(addObject));
             console.log(photoPosts);
 //Объект не пройдёт проверку на валидность и добавление не произойдёт
-            var addFasleObject = {
+            let addFasleObject = {
                 id: '23',
                 description: 'Fasle object',
                 author: 'Somebody',
