@@ -31,9 +31,6 @@ const DomModul = (function () {
     newMassive = JSON.parse(strMas);
 
     let nodes = [];//Массив посTов DOM
-    /*let strNd = localStorage.getItem("nodes");
-    nodes = JSON.parse(strNd);
-    console.log(nodes);*/
     for (let i = 0; i < newMassive.length; i++) {
         let div = createPostDom(newMassive[i].author, newMassive[i].description, newMassive[i].photolink, newMassive[i].hashtags, newMassive[i].likes, newMassive[i].createdAt, newMassive[i].id, false);
         nodes[i] = div;
