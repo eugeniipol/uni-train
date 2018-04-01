@@ -1,5 +1,5 @@
 const Modul = (function () {
-    var photoPosts = [{
+    let photoPosts = [{
         id: '1',
         description: 'Mirskiy castle',
         createdAt: new Date(2016, 5, 4),
@@ -201,42 +201,37 @@ const Modul = (function () {
         }
     ];
 
+
     return {
-        getPhotoPosts: function (begin, number, filterCondig) {
+        getPhotoPosts: function (begin, number, filterConfig) {
             if (begin > photoPosts.length) {
                 console.log('Overflow');
                 return;
             }
-            var newPosts = [];
-            begin = begin || 0;
-            number = number || 10;
-            var count = 0;
-            var j = 0;
-            var i = begin;
-            if (filterCondig) {
-                while (i < photoPosts.length && j < number) {
-                    if (Modul.checkFilters(photoPosts[i], filterCondig)) {
-                        var temp = {};
-                        for (var key in photoPosts[i]) {
-                            temp[key] = photoPosts[i][key];
-                        }
-                        newPosts.push(temp);
-                        j++;
-                        i++;
-                    }
-                    i++;
-                }
+            let config;
+            if(filterConfig === undefined){
+                config = "empty";
             }
             else {
-                while (i < photoPosts.length && j < number) {
-                    var temp = {};
-                    for (var key in photoPosts[i]) {
+                config = filterConfig;
+            }
+            let newPosts = [];
+            begin = begin || 0;
+            number = number || 10;
+            let count = 0;
+            let j = 0;
+            let i = begin;
+            while (i < photoPosts.length && j < number) {
+                if (Modul.checkFilters(photoPosts[i], config)) {
+                    let temp = {};
+                    for (let key in photoPosts[i]) {
                         temp[key] = photoPosts[i][key];
                     }
                     newPosts.push(temp);
-                    i++;
                     j++;
+                    i++;
                 }
+                i++;
             }
             newPosts.sort(function (a, b) {
                 aDate = new Date(a.createdAt);
@@ -245,6 +240,7 @@ const Modul = (function () {
             });
             return newPosts;
         },
+
 
         checkFilters: function (element, filters) {
             if (filters.hashtags) {
@@ -265,7 +261,7 @@ const Modul = (function () {
 
         getPhotoPost: function (number) {
             if (number < photoPosts.length && number >= 0) {
-                for (var i = 0; i < photoPosts.length; i++) {
+                for (let i = 0; i < photoPosts.length; i++) {
                     if (number == photoPosts[i].id) {
                         return photoPosts[i];
                     }
@@ -344,13 +340,13 @@ const Modul = (function () {
 
 
         addPhotoPost: function (element) {
-            for (var k = 0; k < photoPosts.length; k++) {
+            for (let k = 0; k < photoPosts.length; k++) {
                 if (photoPosts[k].id === element.id) {
                     console.log('Element with such ID already exists');
                     return false;
                 }
             }
-            if (Modul.validatePhotoPost(element) == true) {
+            if (Modul.validatePhotoPost(element) === true) {
                 photoPosts.push(element);
                 return true;
             }
@@ -388,7 +384,7 @@ const Modul = (function () {
         },
 
         removePhotoPost: function (object) {
-            var idx = object - 1;
+            let idx = object - 1;
             if (idx < photoPosts.length && idx >= 0) {
                 photoPosts.splice(idx, 1);
                 return true;
@@ -436,10 +432,10 @@ const Modul = (function () {
 
 
 //Добавленеи объекта в массив
-            var addObject = {
+            let addObject = {
                 id: '22',
                 description: 'New castle',
-                createdAt: new Date(2017, 04, 28),
+                createdAt: new Date(2017, 4, 28),
                 author: 'Eugeniipol',
                 photolink: 'Pictures/Minsk.jpg',
                 hashtags: ['beauty'],
@@ -448,7 +444,7 @@ const Modul = (function () {
             console.log(Modul.addPhotoPost(addObject));
             console.log(photoPosts);
 //Объект не пройдёт проверку на валидность и добавление не произойдёт
-            var addFasleObject = {
+            let addFasleObject = {
                 id: '23',
                 description: 'Fasle object',
                 author: 'Somebody',
