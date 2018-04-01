@@ -1,216 +1,242 @@
 const Modul = (function () {
-    let photoPosts = [{
+    var photoPosts = [{
         id: '1',
         description: 'Mirskiy castle',
         createdAt: new Date(2016, 5, 4),
         author: 'Vitaut',
-        photolink: 'Pictures/castle.jpg',
+        photolink: 'public/Pictures/castle.jpg',
         hashtags: ['beauty', 'Belarus'],
-        likes: ['Vasya', 'Eugeniipol']
+        likes: ['Vasya', 'Eugeniipol'],
+        del: false
     },
         {
             id: '2',
             description: 'Bizon',
             createdAt: new Date(2016, 3, 4),
             author: 'Vasya',
-            photolink: 'Pictures/bison.jpg',
+            photolink: 'public/Pictures/bison.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '3',
             description: 'Polotsk',
             createdAt: new Date(2017, 12, 4),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Polotsk.jpg',
+            photolink: 'public/Pictures/Polotsk.jpg',
             hashtags: ['Belarus'],
-            likes: ['Vitaut', 'Vasya']
+            likes: ['Vitaut', 'Vasya'],
+            del: false
         },
         {
             id: '4',
             description: 'Nesvizhskiy castle',
             createdAt: new Date(2018, 1, 14),
             author: 'Vitaut',
-            photolink: 'Pictures/Nesvizh.png',
+            photolink: 'public/Pictures/Nesvizh.png',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vasya', 'Eugeniipol']
+            likes: ['Vasya', 'Eugeniipol'],
+            del: false
         },
         {
             id: '5',
             description: 'Homel',
             createdAt: new Date(2014, 3, 9),
             author: 'Vitaut',
-            photolink: 'Pictures/Homel.jpg',
+            photolink: 'public/Pictures/Homel.jpg',
             hashtags: ['Belarus'],
-            likes: ['Vasya', 'Eugeniipol']
+            likes: ['Vasya', 'Eugeniipol'],
+            del: false
         },
         {
             id: '6',
             description: 'Vitebsk',
             createdAt: new Date(2017, 5, 9),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Vitebsk.jpg',
+            photolink: 'public/Pictures/Vitebsk.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Vasya']
+            likes: ['Vitaut', 'Vasya'],
+            del: false
         },
         {
             id: '7',
             description: 'Grodno',
             createdAt: new Date(2014, 11, 12),
             author: 'Vasya',
-            photolink: 'Pictures/Grodno.jpg',
+            photolink: 'public/Pictures/Grodno.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '8',
             description: 'Brest',
             createdAt: new Date(2016, 5, 13),
             author: 'Vitaut',
-            photolink: 'Pictures/Brest.jpg',
+            photolink: 'public/Pictures/Brest.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vasya', 'Eugeniipol']
+            likes: ['Vasya', 'Eugeniipol'],
+            del: false
         },
         {
             id: '9',
             description: 'Mogilev',
             createdAt: new Date(2016, 5, 14),
             author: 'Vasya',
-            photolink: 'Pictures/Mogilev.jpg',
+            photolink: 'public/Pictures/Mogilev.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '10',
             description: 'Minsk',
             createdAt: new Date(2016, 5, 16),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Minsk.jpg',
+            photolink: 'public/Pictures/Minsk.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Vasya']
+            likes: ['Vitaut', 'Vasya'],
+            del: false
         },
         {
             id: '11',
             description: 'Mir',
             createdAt: new Date(2016, 1, 4),
             author: 'Vasya',
-            photolink: 'Pictures/castle.jpg',
+            photolink: 'public/Pictures/castle.jpg',
             hashtags: [],
-            likes: ['Eugeniipol']
+            likes: ['Eugeniipol'],
+            del: false
         },
         {
             id: '12',
             description: 'Zubr',
             createdAt: new Date(2017, 8, 4),
             author: 'Vitaut',
-            photolink: 'Pictures/bison.jpg',
+            photolink: 'public/Pictures/bison.jpg',
             hashtags: ['beauty'],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '13',
             description: 'Old city',
             createdAt: new Date(2018, 1, 4),
             author: 'Eugeniipol',
+            photolink: 'public/Pictures/Grodno.jpg',
             hashtags: ['Belarus'],
-            likes: []
+            likes: [],
+            del: false
         },
         {
             id: '14',
             description: 'Nesvizh',
             createdAt: new Date(2018, 1, 14),
             author: 'Vitaut',
-            photolink: 'Pictures/Nesvizh.png',
+            photolink: 'public/Pictures/Nesvizh.png',
             hashtags: [],
-            likes: ['Vasya']
+            likes: ['Vasya'],
+            del: false
         },
         {
             id: '15',
             description: 'Palace',
             createdAt: new Date(2013, 12, 12),
             author: 'Vitaut',
-            photolink: 'Pictures/Homel.jpg',
+            photolink: 'public/Pictures/Homel.jpg',
             hashtags: [],
-            likes: ['Eugeniipol']
+            likes: ['Eugeniipol'],
+            del: false
         },
         {
             id: '16',
             description: 'Hills',
             createdAt: new Date(2013, 7, 23),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Vitebsk.jpg',
+            photolink: 'public/Pictures/Vitebsk.jpg',
             hashtags: ['beauty'],
-            likes: []
+            likes: [],
+            del: false
         },
         {
             id: '17',
             description: 'Skyline',
             createdAt: new Date(2017, 12, 31),
             author: 'Vasya',
-            photolink: 'Pictures/Grodno.jpg',
+            photolink: 'public/Pictures/Grodno.jpg',
             hashtags: [],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '18',
             description: 'Sovietskaya street',
-            createdAt: new Date(2017, 8, 14),
+            createdAt: new Date(2017,8 , 14),
             author: 'Vitaut',
-            photolink: 'Pictures/Brest.jpg',
+            photolink: 'public/Pictures/Brest.jpg',
             hashtags: ['Belarus'],
-            likes: ['Vasya']
+            likes: ['Vasya'],
+            del: false
         },
         {
             id: '19',
             description: 'Theatre',
             createdAt: new Date(2012, 11, 14),
             author: 'Vasya',
-            photolink: 'Pictures/Mogilev.jpg',
+            photolink: 'public/Pictures/Mogilev.jpg',
             hashtags: ['culture'],
-            likes: ['Vitaut']
+            likes: ['Vitaut'],
+            del: false
         },
         {
             id: '20',
             description: 'Big city life',
             createdAt: new Date(2017, 6, 6),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Minsk.jpg',
+            photolink: 'public/Pictures/Minsk.jpg',
             hashtags: ['evening'],
-            likes: ['Vitaut', 'Vasya']
+            likes: ['Vitaut', 'Vasya'],
+            del: false
         }
     ];
 
-
     return {
-        getPhotoPosts: function (begin, number, filterConfig) {
+        getPhotoPosts: function (begin, number, filterCondig) {
             if (begin > photoPosts.length) {
                 console.log('Overflow');
                 return;
             }
-            let config;
-            if(filterConfig === undefined){
-                config = "empty";
-            }
-            else {
-                config = filterConfig;
-            }
-            let newPosts = [];
+            var newPosts = [];
             begin = begin || 0;
             number = number || 10;
-            let count = 0;
-            let j = 0;
-            let i = begin;
-            while (i < photoPosts.length && j < number) {
-                if (Modul.checkFilters(photoPosts[i], config)) {
-                    let temp = {};
-                    for (let key in photoPosts[i]) {
+            var count = 0;
+            var j = 0;
+            var i = begin;
+            if (filterCondig) {
+                while (i < photoPosts.length && j < number) {
+                    if (Modul.checkFilters(photoPosts[i], filterCondig)) {
+                        var temp = {};
+                        for (var key in photoPosts[i]) {
+                            temp[key] = photoPosts[i][key];
+                        }
+                        newPosts.push(temp);
+                        j++;
+                        i++;
+                    }
+                    i++;
+                }
+            }
+            else {
+                while (i < photoPosts.length && j < number) {
+                    var temp = {};
+                    for (var key in photoPosts[i]) {
                         temp[key] = photoPosts[i][key];
                     }
                     newPosts.push(temp);
-                    j++;
                     i++;
+                    j++;
                 }
-                i++;
             }
             newPosts.sort(function (a, b) {
                 aDate = new Date(a.createdAt);
@@ -219,7 +245,6 @@ const Modul = (function () {
             });
             return newPosts;
         },
-
 
         checkFilters: function (element, filters) {
             if (filters.hashtags) {
@@ -240,7 +265,7 @@ const Modul = (function () {
 
         getPhotoPost: function (number) {
             if (number < photoPosts.length && number >= 0) {
-                for (let i = 0; i < photoPosts.length; i++) {
+                for (var i = 0; i < photoPosts.length; i++) {
                     if (number == photoPosts[i].id) {
                         return photoPosts[i];
                     }
@@ -319,13 +344,13 @@ const Modul = (function () {
 
 
         addPhotoPost: function (element) {
-            for (let k = 0; k < photoPosts.length; k++) {
+            for (var k = 0; k < photoPosts.length; k++) {
                 if (photoPosts[k].id === element.id) {
                     console.log('Element with such ID already exists');
                     return false;
                 }
             }
-            if (Modul.validatePhotoPost(element) === true) {
+            if (Modul.validatePhotoPost(element) == true) {
                 photoPosts.push(element);
                 return true;
             }
@@ -363,7 +388,7 @@ const Modul = (function () {
         },
 
         removePhotoPost: function (object) {
-            let idx = object - 1;
+            var idx = object - 1;
             if (idx < photoPosts.length && idx >= 0) {
                 photoPosts.splice(idx, 1);
                 return true;
@@ -371,7 +396,11 @@ const Modul = (function () {
             return false;
         },
 
-        testing: function () {
+        countLength: function () {
+            return photoPosts.length;
+        }
+
+        /*testing: function () {
 
 //Получение новых массивов:
             var newMassive = [];
@@ -407,10 +436,10 @@ const Modul = (function () {
 
 
 //Добавленеи объекта в массив
-            let addObject = {
+            var addObject = {
                 id: '22',
                 description: 'New castle',
-                createdAt: new Date(2017, 4, 28),
+                createdAt: new Date(2017, 04, 28),
                 author: 'Eugeniipol',
                 photolink: 'Pictures/Minsk.jpg',
                 hashtags: ['beauty'],
@@ -419,7 +448,7 @@ const Modul = (function () {
             console.log(Modul.addPhotoPost(addObject));
             console.log(photoPosts);
 //Объект не пройдёт проверку на валидность и добавление не произойдёт
-            let addFasleObject = {
+            var addFasleObject = {
                 id: '23',
                 description: 'Fasle object',
                 author: 'Somebody',
@@ -438,7 +467,7 @@ const Modul = (function () {
 //Удаление фотопоста(в скопированном в самом начале массиве, элемент с таким id существует)
             Modul.removePhotoPost(5);
             console.log(photoPosts);
-        }
+        }*/
     }
 })();
 

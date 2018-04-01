@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>coolframe</title></head>
+	<link rel="stylesheet" type="text/css" href="public/styles.css">
+<body class="other">
+	<div id ='header' class="header">
+		<div class="logo">
+		<img class="header" src="public/Styles/coolframe.png" alt="лого">
+	    </div>
+		<div  class="account">
+			<h1 id="account" class="header"></h1>
+		</div>
+		<div id ='log' class="button-header">
+			<a class="red-button" id ="logText">Log in</a>
+		</div>
+		<div id = 'add' class="button-header-add">
+			<a class="red-button">Add photo</a>
+		</div>
+	</div>
+	<div id ="logInBox" class="log-in">
+		<div class="log-in-content">
+			<span class="close">&times</span>
+			<div class = "log-title">
+			    <p class="log-title">Enter login and password.</p>
+		    </div>
+		    <div class="log-input">
+		    	<input type="text" size="40" id = "login"> Enter login
+		    </div>
+		    <div class="log-input">
+		    	<input type="text" size="40" id = "password"> Enter password
+		    </div>
+		    <div class="log-button" id = "logIn">
+		    	<a class="red-button">Log in</a>
+		    </div>
+		</div>
+	</div>
+	<div id ="addForm" class="add-form">
+		<div class="add-form-content" id = "addForm">
+			<span class = "close">&times</span>
+			<div class = "add-photo">
+				<div class = "add-photo-inside">
+				<img src = "public/Styles/empty.jpg" alt="empty space" class="added" id = "photoToPost">
+			    </div>
+			</div>
+			<div class="add-settings" id = "settings">
+				<div class="add-author" id = "author-add">
+				</div>
+				<div class="add-data">
+					<p id = "addData"> </p>
+				</div>
+				<input type="file" name="img" accept="image/jpeg,image/png,image/gif" id = "fileChooser">
+				<div class="add-descript">
+					<textarea name="comment" cols="40" rows="5" id = "descriptText">Description</textarea>
+				</div>
+				<div class="add-hashtags">
+					<div class="add-hashtag-input">
+						<input type="text" size="17" id = "newHashtag"> 
+					</div>
+					<div class="add-hashtag-button">
+						<a class="red-button" id ="newHashtagButton">Add</a>
+					</div>
+				</div>
+			</div>
+			<div class="new-post" id = newPost>
+				<a class="red-button" >Post it</a>
+			</div>
+		</div>
+	</div>
+	<div id = "filterBar" class = "filter-bar">
+	  <div class="author-filter">
+		<div class="list-name">
+			 <input type="checkbox" name="author" value="a2" id = "authorIs">Author
+         </div>
+         <div class="input-name">
+         	<input type="text" size="12" list = "authors" id = "authorInput">
+         	<datalist id = "authors">
+         	</datalist>
+
+		</div>
+     </div>
+     <div class = "data-filter">
+        <div class="list-data">
+        	<input id = 'dataIs' type="checkbox" name="date"  value="a2">Date<Br>
+         </div>
+         <div class="input-day">
+               <input type="text" size="2" id = "dayInput"> Day
+		</div> 
+		<div class="input-mounth">
+               <input type="text" size="2" id = "mounthInput"> Mounth 
+		</div>
+		<div class="input-year">
+               <input type="text" size = "4" id = "yearInput"> Year
+		</div>
+     </div>
+     <div class ="hashtag-filter">
+        <div class="list-hashtag">
+        	<input type="checkbox" name="hashtag" value="a2" id = "hashtahgsIs">Hashtag<Br>
+         </div>
+         <div class="input-hashtag">
+               <input type="text" size="10" list ="hashtags" id = "hashtahgsInput">
+               <datalist id="hashtags">
+               <option value=Belarus></option>
+               <option value="beauty"></option>
+               </datalist>	
+        </div>
+        <div class="add-hashtag-list" id = "addTag">
+        	<a class="red-button">Add</a>
+        </div>
+     </div>
+     <div id ="refreshBtn" class="refresh-button">
+	     <a class="red-button">Refresh</a>
+	</div>
+</div>
+<div id = moreBtn class = "more-button-div">
+	<div class ="more-button" id = "load">
+		<a class="red-button">More</a>
+	</div>
+</div>
+	<div id = "footer" class="footer">
+	    <div class="footer-text">
+	      	Coolframe. Полуэктов Евгений, 2 курс, 2 группа, eugeniipol@gmail.com, 25 марта, 2018 года.
+	    </div>
+	</div>
+	<script src="public/function.js" > </script>
+	<script src="public/DOM.js"></script>
+</body>
+</html>
