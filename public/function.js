@@ -124,7 +124,11 @@ const Modul = (function () {
             description: 'Old city',
             createdAt: new Date(2018, 1, 4),
             author: 'Eugeniipol',
+<<<<<<< HEAD:public/function.js
             photolink: 'public/Pictures/Grodno.jpg',
+=======
+            photolink: 'Pictures/Grodno.jpg',
+>>>>>>> b4eeee0d47b0ebbce20d627283261552662ef1d9:UI/function.js
             hashtags: ['Belarus'],
             likes: [],
             del: false
