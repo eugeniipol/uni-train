@@ -4,7 +4,7 @@ const Modul = (function () {
         description: 'Mirskiy castle',
         createdAt: new Date(2016, 5, 4),
         author: 'Vitaut',
-        photolink: 'Pictures/castle.jpg',
+        photolink: 'public/Pictures/castle.jpg',
         hashtags: ['beauty', 'Belarus'],
         likes: ['Vasya', 'Eugeniipol'],
         del: false
@@ -14,7 +14,7 @@ const Modul = (function () {
             description: 'Bizon',
             createdAt: new Date(2016, 3, 4),
             author: 'Vasya',
-            photolink: 'Pictures/bison.jpg',
+            photolink: 'public/Pictures/bison.jpg',
             hashtags: ['beauty', 'Belarus'],
             likes: ['Vitaut', 'Eugeniipol'],
             del: false
@@ -24,7 +24,7 @@ const Modul = (function () {
             description: 'Polotsk',
             createdAt: new Date(2017, 12, 4),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Polotsk.jpg',
+            photolink: 'public/Pictures/Polotsk.jpg',
             hashtags: ['Belarus'],
             likes: ['Vitaut', 'Vasya'],
             del: false
@@ -34,7 +34,7 @@ const Modul = (function () {
             description: 'Nesvizhskiy castle',
             createdAt: new Date(2018, 1, 14),
             author: 'Vitaut',
-            photolink: 'Pictures/Nesvizh.png',
+            photolink: 'public/Pictures/Nesvizh.png',
             hashtags: ['beauty', 'Belarus'],
             likes: ['Vasya', 'Eugeniipol'],
             del: false
@@ -44,7 +44,7 @@ const Modul = (function () {
             description: 'Homel',
             createdAt: new Date(2014, 3, 9),
             author: 'Vitaut',
-            photolink: 'Pictures/Homel.jpg',
+            photolink: 'public/Pictures/Homel.jpg',
             hashtags: ['Belarus'],
             likes: ['Vasya', 'Eugeniipol'],
             del: false
@@ -54,7 +54,7 @@ const Modul = (function () {
             description: 'Vitebsk',
             createdAt: new Date(2017, 5, 9),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Vitebsk.jpg',
+            photolink: 'public/Pictures/Vitebsk.jpg',
             hashtags: ['beauty', 'Belarus'],
             likes: ['Vitaut', 'Vasya'],
             del: false
@@ -64,7 +64,7 @@ const Modul = (function () {
             description: 'Grodno',
             createdAt: new Date(2014, 11, 12),
             author: 'Vasya',
-            photolink: 'Pictures/Grodno.jpg',
+            photolink: 'public/Pictures/Grodno.jpg',
             hashtags: ['beauty', 'Belarus'],
             likes: ['Vitaut', 'Eugeniipol'],
             del: false
@@ -74,7 +74,7 @@ const Modul = (function () {
             description: 'Brest',
             createdAt: new Date(2016, 5, 13),
             author: 'Vitaut',
-            photolink: 'Pictures/Brest.jpg',
+            photolink: 'public/Pictures/Brest.jpg',
             hashtags: ['beauty', 'Belarus'],
             likes: ['Vasya', 'Eugeniipol'],
             del: false
@@ -84,7 +84,7 @@ const Modul = (function () {
             description: 'Mogilev',
             createdAt: new Date(2016, 5, 14),
             author: 'Vasya',
-            photolink: 'Pictures/Mogilev.jpg',
+            photolink: 'public/Pictures/Mogilev.jpg',
             hashtags: ['beauty', 'Belarus'],
             likes: ['Vitaut', 'Eugeniipol'],
             del: false
@@ -94,7 +94,7 @@ const Modul = (function () {
             description: 'Minsk',
             createdAt: new Date(2016, 5, 16),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Minsk.jpg',
+            photolink: 'public/Pictures/Minsk.jpg',
             hashtags: ['beauty', 'Belarus'],
             likes: ['Vitaut', 'Vasya'],
             del: false
@@ -104,7 +104,7 @@ const Modul = (function () {
             description: 'Mir',
             createdAt: new Date(2016, 1, 4),
             author: 'Vasya',
-            photolink: 'Pictures/castle.jpg',
+            photolink: 'public/Pictures/castle.jpg',
             hashtags: [],
             likes: ['Eugeniipol'],
             del: false
@@ -114,7 +114,7 @@ const Modul = (function () {
             description: 'Zubr',
             createdAt: new Date(2017, 8, 4),
             author: 'Vitaut',
-            photolink: 'Pictures/bison.jpg',
+            photolink: 'public/Pictures/bison.jpg',
             hashtags: ['beauty'],
             likes: ['Vitaut', 'Eugeniipol'],
             del: false
@@ -124,7 +124,7 @@ const Modul = (function () {
             description: 'Old city',
             createdAt: new Date(2018, 1, 4),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Grodno.jpg',
+            photolink: 'public/Pictures/Grodno.jpg',
             hashtags: ['Belarus'],
             likes: [],
             del: false
@@ -134,7 +134,7 @@ const Modul = (function () {
             description: 'Nesvizh',
             createdAt: new Date(2018, 1, 14),
             author: 'Vitaut',
-            photolink: 'Pictures/Nesvizh.png',
+            photolink: 'public/Pictures/Nesvizh.png',
             hashtags: [],
             likes: ['Vasya'],
             del: false
@@ -144,7 +144,7 @@ const Modul = (function () {
             description: 'Palace',
             createdAt: new Date(2013, 12, 12),
             author: 'Vitaut',
-            photolink: 'Pictures/Homel.jpg',
+            photolink: 'public/Pictures/Homel.jpg',
             hashtags: [],
             likes: ['Eugeniipol'],
             del: false
@@ -154,7 +154,7 @@ const Modul = (function () {
             description: 'Hills',
             createdAt: new Date(2013, 7, 23),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Vitebsk.jpg',
+            photolink: 'public/Pictures/Vitebsk.jpg',
             hashtags: ['beauty'],
             likes: [],
             del: false
@@ -164,7 +164,7 @@ const Modul = (function () {
             description: 'Skyline',
             createdAt: new Date(2017, 12, 31),
             author: 'Vasya',
-            photolink: 'Pictures/Grodno.jpg',
+            photolink: 'public/Pictures/Grodno.jpg',
             hashtags: [],
             likes: ['Vitaut', 'Eugeniipol'],
             del: false
@@ -174,7 +174,7 @@ const Modul = (function () {
             description: 'Sovietskaya street',
             createdAt: new Date(2017,8 , 14),
             author: 'Vitaut',
-            photolink: 'Pictures/Brest.jpg',
+            photolink: 'public/Pictures/Brest.jpg',
             hashtags: ['Belarus'],
             likes: ['Vasya'],
             del: false
@@ -184,7 +184,7 @@ const Modul = (function () {
             description: 'Theatre',
             createdAt: new Date(2012, 11, 14),
             author: 'Vasya',
-            photolink: 'Pictures/Mogilev.jpg',
+            photolink: 'public/Pictures/Mogilev.jpg',
             hashtags: ['culture'],
             likes: ['Vitaut'],
             del: false
@@ -194,7 +194,7 @@ const Modul = (function () {
             description: 'Big city life',
             createdAt: new Date(2017, 6, 6),
             author: 'Eugeniipol',
-            photolink: 'Pictures/Minsk.jpg',
+            photolink: 'public/Pictures/Minsk.jpg',
             hashtags: ['evening'],
             likes: ['Vitaut', 'Vasya'],
             del: false

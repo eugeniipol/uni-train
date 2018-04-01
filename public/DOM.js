@@ -159,7 +159,7 @@ const DomModul = (function () {
             let descriptText = document.getElementById("descriptText").value;
             let createdAt = document.getElementById("addData").textContent;
             let likes = [];
-            let filePath = "Pictures/" + fileChooser.files[0].name;
+            let filePath = "public/Pictures/" + fileChooser.files[0].name;
             console.log(filePath);
             DomModul.addPhotoPostDom(account.textContent, descriptText, filePath, hashtagsAdd, likes);
             DomModul.afterLogging();
@@ -168,7 +168,7 @@ const DomModul = (function () {
         else {
             let newLink = "";
             if (fileChooser.files[0] !== undefined) {
-                newLink = "Pictures/" + fileChooser.files[0].name;
+                newLink = "public/Pictures/" + fileChooser.files[0].name;
             }
             else {
                 newLink = templink;
