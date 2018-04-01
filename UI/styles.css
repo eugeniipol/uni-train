@@ -32,6 +32,13 @@ div.header{
 	bottom: 52%;
 	width: 15%;
 }
+.button-header-add{
+	position: relative;
+	display: none;
+	left: 24%;
+	bottom: 52%;
+	width: 15%;
+}
 .filter-bar{
 	position: relative;
 	height: 300px;
@@ -107,6 +114,12 @@ div.header{
 	color: blue;
 	font-size: 140%
 }
+.add-hashtag-list{
+	position: relative;
+	display: inline-block;
+	width: 5%;
+	left: 10%;
+}
 .post{
 	padding-top: 5%;
 	padding-bottom: 3%;
@@ -145,6 +158,7 @@ div.header{
 	display: inline-block;
 	width: 38%;
 	left: 35%;
+	cursor: pointer;
 }
 .edit{
 	position: relative;
@@ -182,6 +196,16 @@ div.header{
 	width: 10%;
 	left:85%;
 }
+.more-button-div{
+	position: relative;
+	height: 40px;
+	background: url(Styles/backgroud.jpg);
+}
+.more-button{
+	position: relative;
+	width: 9%;
+	left: 90%;
+}
 .footer{
 	height: 100px;
 	background: white;
@@ -200,7 +224,127 @@ div.header{
   color: #3c763d;
   background-color: #dff0d8;
 }
-img.post{
+.log-in{
+	display: none;
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.5);
+	min-width: 800px;
+}
+.log-in-content{
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding-top: 0.5%; 
+	padding-right: 1%;
+	padding-left: 1%;
+	width: 80%;
+}
+.close{
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.log-title{
+	position: relative;
+	left: 18%;
+}
+.log-input{
+	position: relative;
+	padding-bottom: 20px;
+	left: 34%;
+}
+.log-button{
+	position: relative;
+	padding-top: 20px;
+	padding-bottom: 42px;
+	width: 15%;
+	left: 42%;
+
+}
+.add-form{
+	display: none;
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.5);
+	min-width: 800px;
+}
+.add-form-content{
+	background-color: grey;
+	margin: 15% auto;
+	padding-top: 0.5%; 
+	padding-right: 1%;
+	padding-left: 1%;
+	width: 70%;
+	height: 100%;
+}
+.add-photo{
+	position: relative;
+	display: inline-block;
+	left: 10%;
+	padding-top: 4%;
+	padding-bottom: 4%;
+	max-width: 400px;
+}
+.add-settings{
+	position: relative;
+	display: inline-block;
+	left: 20%;
+	max-width: 500px;
+}
+.add-author{
+	font-size: 20px;
+	 color: black;
+}
+.add-data{
+	font-size: 15px;
+	color: black;
+}
+.add-choose-button{
+	padding-top: 9%;
+	position: relative;
+	width: 50%;
+}
+.add-descript{
+	padding-top: 13%;
+	position: relative;
+}
+.add-hashtags{
+	padding-top: 11%;
+	position: relative;
+}
+.add-hashtag-input{
+	position: relative;
+	display: inline-block;
+}
+.add-hashtag-button{
+	position: relative;
+	display: inline-block;
+	left: 5%;
+	width: 20%;
+}
+.new-post{
+	position: relative;
+	padding-top: 1%;
+	left: 61%;
+	width: 20%;
+}
+p.log-title{
+	color: blue;
+	font-size: 25px;
+}
+img.post-photo{
 	width: 65%;
 }
 select.select {
@@ -210,6 +354,9 @@ select.select {
 img.header{
 	height: 210px;
 	display: inline-block;
+}
+img.added{
+	max-width: 400px;
 }
 h1.header{
 	float: left;
@@ -228,4 +375,13 @@ a.red-button {
   background: rgb(212,75,56); 
   padding: 7% 20% 7% 20%; 
   outline: none;
+  cursor: pointer;
 } 
+a.red-button-choose{
+  color: #fff;
+  text-decoration: none; 
+  user-select: none; 
+  background: rgb(212,75,56);
+  outline: none;
+  cursor: pointer;
+}

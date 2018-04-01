@@ -172,7 +172,7 @@ const Modul = (function () {
         {
             id: '18',
             description: 'Sovietskaya street',
-            createdAt: new Date(2017, 8, 14),
+            createdAt: new Date(2017,8 , 14),
             author: 'Vitaut',
             photolink: 'Pictures/Brest.jpg',
             hashtags: ['Belarus'],
