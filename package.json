@@ -1,0 +1,19 @@
+{
+  "name": "photoportal",
+  "version": "1.0.0",
+  "description": "Photoportal ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eugeniipol/uni-train.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eugeniipol/uni-train/issues"
+  },
+  "homepage": "https://github.com/eugeniipol/uni-train#readme"
+}
