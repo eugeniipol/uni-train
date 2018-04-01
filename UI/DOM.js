@@ -30,10 +30,22 @@ const DomModul = (function () {
     let strMas = localStorage.getItem("massive");
     newMassive = JSON.parse(strMas);
 
+<<<<<<< HEAD
     let nodes = [];//Массив посTов DOM
     for (let i = 0; i < newMassive.length; i++) {
         let div = createPostDom(newMassive[i].author, newMassive[i].description, newMassive[i].photolink, newMassive[i].hashtags, newMassive[i].likes, newMassive[i].createdAt, newMassive[i].id, false);
         nodes[i] = div;
+=======
+    let strIndeficator = localStorage.getItem("defenition");
+    let indificator = JSON.parse(strIndeficator);
+
+    let nodes = [];//Массив посTов DOM
+    if(indificator == true) {
+        for (let i = 0; i < newMassive.length; i++) {
+            let div = createPostDom(newMassive[i].author, newMassive[i].description, newMassive[i].photolink, newMassive[i].hashtags, newMassive[i].likes, newMassive[i].createdAt, newMassive[i].id, false);
+            nodes[i] = div;
+        }
+>>>>>>> e29ab665fd8a855378176592e2f492b467a0e348
     }
 
     let users = [];//Массив пользователей
@@ -403,7 +415,11 @@ const DomModul = (function () {
                     password: "hleb"
                 }
             ];
+<<<<<<< HEAD
 
+=======
+            let indef = true;
+>>>>>>> e29ab665fd8a855378176592e2f492b467a0e348
             let firstNodes = [];
             let firstMassive = [];
             let len = Modul.countLength();
@@ -412,9 +428,17 @@ const DomModul = (function () {
                 let div = createPostDom(firstMassive[i].author, firstMassive[i].description, firstMassive[i].photolink, firstMassive[i].hashtags, firstMassive[i].likes, firstMassive[i].createdAt, firstMassive[i].id, false);
                 firstNodes[i] = div;
             }
+<<<<<<< HEAD
             let strUsers = JSON.stringify(users);
             let strFirstMassive = JSON.stringify(firstMassive);
             let strFirstNodes = JSON.stringify(firstNodes);
+=======
+            let strIndef = JSON.stringify(indef);
+            let strUsers = JSON.stringify(users);
+            let strFirstMassive = JSON.stringify(firstMassive);
+            let strFirstNodes = JSON.stringify(firstNodes);
+            localStorage.setItem("defenition", strIndef);
+>>>>>>> e29ab665fd8a855378176592e2f492b467a0e348
             localStorage.setItem("massive", strFirstMassive);
             localStorage.setItem("nodes", strFirstNodes);
             localStorage.setItem("users", strUsers);
