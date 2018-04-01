@@ -6,7 +6,8 @@ const Modul = (function () {
         author: 'Vitaut',
         photolink: 'Pictures/castle.jpg',
         hashtags: ['beauty', 'Belarus'],
-        likes: ['Vasya', 'Eugeniipol']
+        likes: ['Vasya', 'Eugeniipol'],
+        del: false
     },
         {
             id: '2',
@@ -15,7 +16,8 @@ const Modul = (function () {
             author: 'Vasya',
             photolink: 'Pictures/bison.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '3',
@@ -24,7 +26,8 @@ const Modul = (function () {
             author: 'Eugeniipol',
             photolink: 'Pictures/Polotsk.jpg',
             hashtags: ['Belarus'],
-            likes: ['Vitaut', 'Vasya']
+            likes: ['Vitaut', 'Vasya'],
+            del: false
         },
         {
             id: '4',
@@ -33,7 +36,8 @@ const Modul = (function () {
             author: 'Vitaut',
             photolink: 'Pictures/Nesvizh.png',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vasya', 'Eugeniipol']
+            likes: ['Vasya', 'Eugeniipol'],
+            del: false
         },
         {
             id: '5',
@@ -42,7 +46,8 @@ const Modul = (function () {
             author: 'Vitaut',
             photolink: 'Pictures/Homel.jpg',
             hashtags: ['Belarus'],
-            likes: ['Vasya', 'Eugeniipol']
+            likes: ['Vasya', 'Eugeniipol'],
+            del: false
         },
         {
             id: '6',
@@ -51,7 +56,8 @@ const Modul = (function () {
             author: 'Eugeniipol',
             photolink: 'Pictures/Vitebsk.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Vasya']
+            likes: ['Vitaut', 'Vasya'],
+            del: false
         },
         {
             id: '7',
@@ -60,7 +66,8 @@ const Modul = (function () {
             author: 'Vasya',
             photolink: 'Pictures/Grodno.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '8',
@@ -69,7 +76,8 @@ const Modul = (function () {
             author: 'Vitaut',
             photolink: 'Pictures/Brest.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vasya', 'Eugeniipol']
+            likes: ['Vasya', 'Eugeniipol'],
+            del: false
         },
         {
             id: '9',
@@ -78,7 +86,8 @@ const Modul = (function () {
             author: 'Vasya',
             photolink: 'Pictures/Mogilev.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '10',
@@ -87,7 +96,8 @@ const Modul = (function () {
             author: 'Eugeniipol',
             photolink: 'Pictures/Minsk.jpg',
             hashtags: ['beauty', 'Belarus'],
-            likes: ['Vitaut', 'Vasya']
+            likes: ['Vitaut', 'Vasya'],
+            del: false
         },
         {
             id: '11',
@@ -96,7 +106,8 @@ const Modul = (function () {
             author: 'Vasya',
             photolink: 'Pictures/castle.jpg',
             hashtags: [],
-            likes: ['Eugeniipol']
+            likes: ['Eugeniipol'],
+            del: false
         },
         {
             id: '12',
@@ -105,15 +116,18 @@ const Modul = (function () {
             author: 'Vitaut',
             photolink: 'Pictures/bison.jpg',
             hashtags: ['beauty'],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '13',
             description: 'Old city',
             createdAt: new Date(2018, 1, 4),
             author: 'Eugeniipol',
+            photolink: 'Pictures/Grodno.jpg',
             hashtags: ['Belarus'],
-            likes: []
+            likes: [],
+            del: false
         },
         {
             id: '14',
@@ -122,7 +136,8 @@ const Modul = (function () {
             author: 'Vitaut',
             photolink: 'Pictures/Nesvizh.png',
             hashtags: [],
-            likes: ['Vasya']
+            likes: ['Vasya'],
+            del: false
         },
         {
             id: '15',
@@ -131,7 +146,8 @@ const Modul = (function () {
             author: 'Vitaut',
             photolink: 'Pictures/Homel.jpg',
             hashtags: [],
-            likes: ['Eugeniipol']
+            likes: ['Eugeniipol'],
+            del: false
         },
         {
             id: '16',
@@ -140,7 +156,8 @@ const Modul = (function () {
             author: 'Eugeniipol',
             photolink: 'Pictures/Vitebsk.jpg',
             hashtags: ['beauty'],
-            likes: []
+            likes: [],
+            del: false
         },
         {
             id: '17',
@@ -149,7 +166,8 @@ const Modul = (function () {
             author: 'Vasya',
             photolink: 'Pictures/Grodno.jpg',
             hashtags: [],
-            likes: ['Vitaut', 'Eugeniipol']
+            likes: ['Vitaut', 'Eugeniipol'],
+            del: false
         },
         {
             id: '18',
@@ -158,7 +176,8 @@ const Modul = (function () {
             author: 'Vitaut',
             photolink: 'Pictures/Brest.jpg',
             hashtags: ['Belarus'],
-            likes: ['Vasya']
+            likes: ['Vasya'],
+            del: false
         },
         {
             id: '19',
@@ -167,7 +186,8 @@ const Modul = (function () {
             author: 'Vasya',
             photolink: 'Pictures/Mogilev.jpg',
             hashtags: ['culture'],
-            likes: ['Vitaut']
+            likes: ['Vitaut'],
+            del: false
         },
         {
             id: '20',
@@ -176,7 +196,8 @@ const Modul = (function () {
             author: 'Eugeniipol',
             photolink: 'Pictures/Minsk.jpg',
             hashtags: ['evening'],
-            likes: ['Vitaut', 'Vasya']
+            likes: ['Vitaut', 'Vasya'],
+            del: false
         }
     ];
 
@@ -371,7 +392,11 @@ const Modul = (function () {
             return false;
         },
 
-        testing: function () {
+        countLength: function () {
+            return photoPosts.length;
+        }
+
+        /*testing: function () {
 
 //Получение новых массивов:
             var newMassive = [];
@@ -438,7 +463,7 @@ const Modul = (function () {
 //Удаление фотопоста(в скопированном в самом начале массиве, элемент с таким id существует)
             Modul.removePhotoPost(5);
             console.log(photoPosts);
-        }
+        }*/
     }
 })();
 
