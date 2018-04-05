@@ -344,17 +344,17 @@ const Modul = (function () {
 
 
         addPhotoPost: function (element) {
-            for (var k = 0; k < photoPosts.length; k++) {
-                if (photoPosts[k].id === element.id) {
-                    console.log('Element with such ID already exists');
-                    return false;
+                for (var k = 0; k < photoPosts.length; k++) {
+                    if (photoPosts[k].id === element.id) {
+                        console.log('Element with such ID already exists');
+                        return false;
+                    }
                 }
-            }
-            if (Modul.validatePhotoPost(element) == true) {
-                photoPosts.push(element);
-                return true;
-            }
-            return false;
+                if (Modul.validatePhotoPost(element) == true) {
+                    photoPosts.push(element);
+                    return true;
+                }
+                return false;
         },
 
 
