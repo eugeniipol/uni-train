@@ -1,5 +1,4 @@
 const DomModul = (function () {
-    let ids = 21;
     let logBtn = document.getElementById('log');
     let logBox = document.getElementById('logInBox');
     let logText = document.getElementById('logText');
@@ -22,40 +21,47 @@ const DomModul = (function () {
     let entered = false;
     let repaired = false;
     let shown = 0;//переменная для отображения показанных постов.
-    //len = Modul.countLength();
+    len = Modul.countLength();
     let templink;
     let tempid;
 
 
-    let newMassive = [];//Массив посTов js
-    let strMas = localStorage.getItem("massive");
-    newMassive = JSON.parse(strMas);
+    //let nodes = [];//Массив посTов DOM
+    //let users = [];//model.getUsers();
 
-    let strIndeficator = localStorage.getItem("defenition");
-    let indificator = JSON.parse(strIndeficator);
-
-    let nodes = [];//Массив посTов DOM
-    if(indificator == true) {
-        for (let i = 0; i < newMassive.length; i++) {
-            let div = createPostDom(newMassive[i].author, newMassive[i].description, newMassive[i].photolink, newMassive[i].hashtags, newMassive[i].likes, newMassive[i].createdAt, newMassive[i].id, false);
-            nodes[i] = div;
+    // Взятие фотопостов с сервера
+    /*xhr = new XMLHttpRequest();
+    let newMassive = [];
+    xhr.open('GET', '/getPhotoPostsAll');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) {
+            return;
+        }
+        if (xhr.status !== 200) {
+            console.log(xhr.status + ': ' + xhr.statusText);
+        }
+        else {
+            newMassive = JSON.parse(xhr.responseText);
+            for (let i = 0; i < newMassive.length; i++) {
+                if (i === newMassive.length - 1) {
+                    ids = parseInt(newMassive[i].id) + 1;
+                }
+                let div = createPostDom(newMassive[i].author, newMassive[i].description, newMassive[i].photolink, newMassive[i].hashtags, newMassive[i].likes, newMassive[i].createdAt, newMassive[i].id, newMassive[i].del);
+                nodes[i] = div;
+            }
         }
     }
+    xhr.send();*/
 
 
-    let users = [];//Массив пользователей
-    let strUsers = localStorage.getItem("users");
-    users = JSON.parse(strUsers);
-
-
-    let hashs = [];//Массив хэшTегов(фильTры) DOM
+   /* let hashs = [];//Массив хэшTегов(фильTры) DOM
     let hashtags = [];//Массив хэштегов JS
     let hashsAdd = [];//Массив хэштегов для нового фото DOM
-    let hashtagsAdd = [];//Массив хэштегов для нового фото JS
+    let hashtagsAdd = [];//Массив хэштегов для нового фото JS*/
 
 
     //Кнопка log in/out
-    logBtn.addEventListener("click", function () {
+    /*logBtn.addEventListener("click", function () {
         if (entered === false) {
             logBox.style.display = "block"
         }
@@ -67,59 +73,75 @@ const DomModul = (function () {
             DomModul.afterLoggingOut();
             DomModul.showPosts();
         }
-    });
+    });*/
 
 
     //крест в log in/out боксе
-    spanLog.addEventListener("click", function () {
+    /*spanLog.addEventListener("click", function () {
         logBox.style.display = "none";
-    });
+    });*/
 
 
     //Кнопка log in в боксе
-    logIn.addEventListener("click", function () {
-            let login = document.getElementById("login").value;
+    /*logIn.addEventListener("click", function () {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/getUsers');
+            login = document.getElementById("login").value;
             let password = document.getElementById("password").value;
             let user = {username: login, password: password};
-            for (let i = 0; i < users.length; i++) {
-                if (String(users[i].username) === String(user.username) && String(users[i].password) === String(user.password)) {
-                    account.textContent = login;
-                    entered = true;
-                    addBtn.style.display = "inline-block";
-                    logText.textContent = "Log out";
-                    logBox.style.display = "none";
-                    DomModul.afterLogging();
-                    DomModul.showPosts();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState !== 4) {
                     return;
                 }
+                if (xhr.status !== 200) {
+                    console.log(xhr.status + ': ' + xhr.statusText);
+                }
+                else {
+                    users = JSON.parse(xhr.responseText);
+                    console.log(users);
+                    for (let i = 0; i < users.length; i++) {
+                        if (String(users[i].username) === String(user.username) && String(users[i].password) === String(user.password)) {
+                            account.textContent = login;
+                            entered = true;
+                            addBtn.style.display = "inline-block";
+                            logText.textContent = "Log out";
+                            logBox.style.display = "none";
+                            DomModul.afterLogging();
+                            DomModul.showPosts();
+                            return;
+                        }
+                    }
+                    alert("Wrong user or password");
+                    logBox.style.display = "none";
+                }
             }
-            alert("Wrong user or password");
-            logBox.style.display = "none";
+            xhr.send();
         }
-    );
+    );*/
 
 
-    //Кнока добавить пост
-    addBtn.addEventListener("click", function () {
+//Кнока добавить пост
+    /*addBtn.addEventListener("click", function () {
         addBox.style.display = "block";
         let author = document.getElementById("author-add");
         author.textContent = account.textContent;
         let curDate = new Date();
         addData.textContent = String(curDate);
-    });
+    });*/
 
 
-    //крест в addPhoto боксе
-    spanAdd.addEventListener("click", function () {
+//крест в addPhoto боксе
+    /*spanAdd.addEventListener("click", function () {
         addBox.style.display = "none";
-    });
+    });*/
 
 
-    //Добавление хэштега в списке фильтров
-    addTag.addEventListener("click", function () {
+//Добавление хэштега в списке фильтров
+    /*addTag.addEventListener("click", function () {
         let filterBar = document.getElementById("filterBar");
         let hashtagsInput = document.getElementById("hashtahgsInput").value;
         if (hashtags.indexOf(hashtagsInput) === -1) {
+            view.addHashFilter(hashtagsInput);
             let div = createHashtagFilter(hashtagsInput);
             filterBar.insertBefore(div, refresh);
             div.addEventListener("click", function () {
@@ -131,11 +153,11 @@ const DomModul = (function () {
             hashs.push(div);
             hashtags.push(hashtagsInput);
         }
-    });
+    });*/
 
 
-    //Добавление хэштега в создании поста
-    newHashBtn.addEventListener("click", function () {
+//Добавление хэштега в создании поста
+    /*newHashBtn.addEventListener("click", function () {
         let settings = document.getElementById("settings");
         let hashtagsInput = document.getElementById("newHashtag").value;
         let div = createHashtagFilterAdd(hashtagsInput);
@@ -149,17 +171,21 @@ const DomModul = (function () {
         });
         hashsAdd.push(div);
         hashtagsAdd.push(hashtagsInput);
-    });
+    });*/
 
 
-    //Добавление//редактирование поста
-    newPost.addEventListener("click", function () {
-        console.log(repaired);
+//Добавление//редактирование поста
+   /* newPost.addEventListener("click", function () {
         if (repaired === false) {
             let descriptText = document.getElementById("descriptText").value;
             let createdAt = document.getElementById("addData").textContent;
             let likes = [];
-            let filePath = "public/Pictures/" + fileChooser.files[0].name;
+            let filePath = "Pictures/" + fileChooser.files[0].name;
+            let formData = new FormData();
+            formData.append('file', fileChooser.files[0]);
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/uploadImage');
+            xhr.send(formData);
             console.log(filePath);
             DomModul.addPhotoPostDom(account.textContent, descriptText, filePath, hashtagsAdd, likes);
             DomModul.afterLogging();
@@ -168,7 +194,7 @@ const DomModul = (function () {
         else {
             let newLink = "";
             if (fileChooser.files[0] !== undefined) {
-                newLink = "public/Pictures/" + fileChooser.files[0].name;
+                newLink = "Pictures/" + fileChooser.files[0].name;
             }
             else {
                 newLink = templink;
@@ -178,23 +204,23 @@ const DomModul = (function () {
                 description: descriptText.value,
                 hashtags: hashtagsAdd
             }
-            console.log(tempid);
             DomModul.editPhotoPostDom(tempid, object);
             DomModul.clearTape();
             DomModul.showPosts(shown);
             addBox.style.display = "none";
             repaired = false;
         }
-    })
+    })*/
 
-    //Добавление 10 постов
-    load.addEventListener("click", function () {
+
+//Добавление 10 постов
+    /*load.addEventListener("click", function () {
         DomModul.showPosts(shown + 10);
-    });
+    });*/
 
 
-    //Фильтрация постов.
-    refresh.addEventListener("click", function () {
+//Фильтрация постов.
+    /*refresh.addEventListener("click", function () {
         DomModul.clearTape();
         shown = 0;
         let authorIs = document.getElementById("authorIs");
@@ -227,10 +253,10 @@ const DomModul = (function () {
             DomModul.afterLogging();
         }
         DomModul.showPosts(shown + 10);
-    });
+    });*/
 
 
-    function checkFilters(element, filters) {
+    /*function checkFilters(element, filters) {
         if (filters.hashtags) {
             for (k = 0; k < filters.hashtags.length; k++) {
                 if (element.hashtags.indexOf(filters.hashtags[k]) == -1) {
@@ -251,10 +277,10 @@ const DomModul = (function () {
             }
         }
         return true;
-    }
+    }*/
 
 
-    function createHashtagFilter(hashtag) {
+    /*function createHashtagFilter(hashtag) {
         let div = document.createElement('div');
         div.className = "hashtag";
         let img = document.createElement('img');
@@ -267,10 +293,10 @@ const DomModul = (function () {
         div.appendChild(img);
         div.appendChild(text);
         return div;
-    }
+    }*/
 
 
-    function createHashtagFilterAdd(hashtag) {
+   /* function createHashtagFilterAdd(hashtag) {
         let div = document.createElement('div');
         div.className = "hashtag";
         let img = document.createElement('img');
@@ -283,10 +309,10 @@ const DomModul = (function () {
         div.appendChild(img);
         div.appendChild(text);
         return div;
-    }
+    }*/
 
 
-    function createPostDom(author, descript, link, hashtags, likes, createdAt, id, del) {
+    /*function createPostDom(author, descript, link, hashtags, likes, createdAt, id, del) {
         let name = document.getElementById('account');
         //Общий div поста
         let div = document.createElement('div');
@@ -379,7 +405,6 @@ const DomModul = (function () {
         divText.className = "text text-new";
         divText.textContent = descript;
         div.appendChild(divText);
-
         //Хэштеги
         for (let j = 0; j < hashtags.length; j++) {
             let divHash = document.createElement('div');
@@ -390,56 +415,12 @@ const DomModul = (function () {
         div.setAttribute('delete', del);
         div.setAttribute('id', id);
         return div;
-    }
+    }*/
 
 
     return {
-        //Первый запуск, сохранение массива в local storage
-        firstTime: function () {
-            //Массив пользователей
-            let users = [{
-                username: "Eugeniipol",
-                password: "password"
-            },
-                {
-                    username: "Alina_rosso",
-                    password: "coffee"
-                },
-                {
-                    username: "Vasya",
-                    password: "hleb"
-                }
-            ];
-            let indef = true;
-            let firstNodes = [];
-            let firstMassive = [];
-            let len = Modul.countLength();
-            firstMassive = Modul.getPhotoPosts(0, len);
-            for (let i = 0; i < len; i++) {
-                let div = createPostDom(firstMassive[i].author, firstMassive[i].description, firstMassive[i].photolink, firstMassive[i].hashtags, firstMassive[i].likes, firstMassive[i].createdAt, firstMassive[i].id, false);
-                firstNodes[i] = div;
-            }
-            let strIndef = JSON.stringify(indef);
-            let strUsers = JSON.stringify(users);
-            let strFirstMassive = JSON.stringify(firstMassive);
-            let strFirstNodes = JSON.stringify(firstNodes);
-            localStorage.setItem("defenition", strIndef);
-            localStorage.setItem("massive", strFirstMassive);
-            localStorage.setItem("nodes", strFirstNodes);
-            localStorage.setItem("users", strUsers);
-        },
-
-        //Обновление localStorage
-        uploadLocal: function () {
-            let strNewMas = JSON.stringify(newMassive);
-            let strNodes = JSON.stringify(nodes);
-            localStorage.setItem("massive", strNewMas);
-            localStorage.setItem("nodes", strNodes);
-        },
-
-
         //Добавление нового фотопоста
-        addPhotoPostDom: function (author, descript, link, hashtags, likes) {
+        /*addPhotoPostDom: function (author, descript, link, hashtags, likes) {
             idst = String(ids);
             let newPost = {
                 id: idst,
@@ -456,14 +437,27 @@ const DomModul = (function () {
                 nodes.unshift(div);
                 let filter = document.getElementById('filterBar');
                 document.body.insertBefore(div, (filter).nextSibling);
-                newMassive.unshift(newPost);
+                model.newMassive.unshift(newPost);
                 ids++;
-                DomModul.uploadLocal();
+                xhr = new XMLHttpRequest();
+                xhr.open('POST', '/addPhotoPost');
+                xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState !== 4) {
+                        return;
+                    }
+                    if (xhr.status !== 200) {
+                        console.log(xhr.status + ': ' + xhr.statusText);
+                    }
+                    else {
+                    }
+                }
+                xhr.send(JSON.stringify(newPost));
             }
-        },
+        },*/
 
 
-        afterLogging: function () {
+        /*afterLogging: function () {
             let login = document.getElementById('account').textContent;
             console.log(document.getElementById('account'));
             for (let i = 0; i < nodes.length; i++) {
@@ -477,10 +471,10 @@ const DomModul = (function () {
                 let likes = nodes[i].getElementsByClassName("like like-new");
                 likes[0].style.display = "inline-block";
             }
-        },
+        },*/
 
 
-        afterLoggingOut: function () {
+        /*afterLoggingOut: function () {
             for (let i = 0; i < nodes.length; i++) {
                 let deletes = nodes[i].getElementsByClassName("delete delete-new");
                 deletes[0].style.display = "none";
@@ -489,11 +483,11 @@ const DomModul = (function () {
                 let likes = nodes[i].getElementsByClassName("like like-new");
                 likes[0].style.display = "none";
             }
-        },
+        },*/
 
 
         //Удаление поста
-        deletePhotoPsotDom: function (ids) {
+        /*deletePhotoPsotDom: function (ids) {
             // Modul.removePhotoPost(ids);
             for (let i = 0; i < nodes.length; i++) {
                 if (nodes[i].getAttribute('id') === String(ids)) {
@@ -506,28 +500,40 @@ const DomModul = (function () {
             for (let i = 0; i < newMassive.length; i++) {
                 if (newMassive[i].id === String(ids)) {
                     newMassive[i].del = true;
-                    DomModul.uploadLocal();
                 }
             }
-        },
+            xhr = new XMLHttpRequest();
+            xhr.open('DELETE', '/removePhotoPost?id=' + ids);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState !== 4) {
+                    return;
+                }
+                if (xhr.status !== 200) {
+                    console.log(xhr.status + ': ' + xhr.statusText);
+                }
+                else {
+                    console.log(xhr.responseText);
+                }
+            }
+            xhr.send();
+        },*/
 
 
-        likePhotoPostDom: function (ids) {
+        /*likePhotoPostDom: function (ids) {
             for (let i = 0; i < newMassive.length; i++) {
                 if (newMassive[i].id === String(ids)) {
                     if (newMassive[i].likes.indexOf(account.textContent) === -1) {
                         newMassive[i].likes.push(account.textContent);
                         console.log(account.textContent);
                         console.log(newMassive[i].likes);
-                        DomModul.uploadLocal();
                     }
                 }
             }
-        },
+        },*/
 
 
         //Редактирование фотопоста
-        editPhotoPostDom: function (id, object) {
+        /*editPhotoPostDom: function (id, object) {
             DomModul.editPhotoPost(id, object);
             for (let i = 0; i < nodes.length; i++) {
                 if (String(nodes[i].getAttribute('id')) === String(id)) {
@@ -546,29 +552,45 @@ const DomModul = (function () {
                     }
                     nodes[i] = div;
                     DomModul.afterLogging();
-                    DomModul.uploadLocal();
+                    xhr = new XMLHttpRequest();
+                    xhr.open('PUT', '/editPhotoPost?id=' + id);
+                    xhr.setRequestHeader('Content-type', 'application/json');
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+                        if (xhr.status !== 200) {
+                            console.log(xhr.status + ': ' + xhr.statusText);
+                        }
+                        else {
+                        }
+                    }
+                    xhr.send(JSON.stringify(temp));
                 }
             }
-        },
+        },*/
 
 
-        //Очистка ленты
+        /*//Очистка ленты
         clearTape: function () {
             let files = document.getElementsByClassName('post');
             while (files.length > 0) {
                 let del = files[0];
                 document.body.removeChild(del);
             }
-        },
+        },*/
 
 
         //Отображение постов
-        showPosts: function (ten) {
+        /*showPosts: function (ten) {
+            nodes = model.getNodes();
+            newMassive = model.getNewMassive();
             let authors = [];
             let list = document.getElementById('authors');
             let lists = list.children;
             loadMore = document.getElementById('moreBtn');
             let num = 0;//счётчик для установки последнего фотопоста
+            console.log(nodes.length);
             for (let i = 0; i < nodes.length; i++) {
                 if (nodes[i].getAttribute('delete') !== 'true' && num < ten) {
                     num++;
@@ -584,10 +606,10 @@ const DomModul = (function () {
                 option.setAttribute('value', authors[j]);
                 list.appendChild(option);
             }
-        },
+        },*/
 
 
-        editPhotoPost: function (id, object) {
+        /*editPhotoPost: function (id, object) {
             for (var i = 0; i < newMassive.length; i++) {
                 if (String(newMassive[i].id) === String(id)) {
                     var temp = {};
@@ -607,6 +629,7 @@ const DomModul = (function () {
                                 break;
                         }
                     }
+                    temp.createdAt = new Date(temp.data);
                     if (DomModul.validatePhotoPost(temp) === true) {
                         newMassive[i] = temp;
                         return true;
@@ -679,8 +702,9 @@ const DomModul = (function () {
                 }
             }
             return true;
-        },
+        },*/
 
+        //createPostDom, shown,
 
         testing: function () {
             DomModul.showPosts();
