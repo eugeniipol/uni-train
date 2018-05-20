@@ -3,9 +3,24 @@ const fs = require('fs');
 const app = express();
 const parser = require('body-parser');
 const multer = require('multer');
-
 const upload = multer();
+const passport = require('./passport');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
+
+app.use(cookieParser());
+app.use(
+    session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false,
+        cookie: {secure: false}
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(parser.urlencoded({extended: false}));
 
 app.use(express.static('public'));
 app.use(parser.json());
@@ -168,6 +183,14 @@ app.post('/uploadImage', upload.single('file'), (req, res) => {
 });
 
 
+app.post('/login', passport.authenticate('local'), function (req,res) {
+    res.send;
+    res.send(req.user.username);
+});
+
+
+
+
 function checkFilters(element, filters) {
     if (filters.hashtags) {
         for (k = 0; k < filters.hashtags.length; k++) {
@@ -183,6 +206,7 @@ function checkFilters(element, filters) {
     }
     return true;
 }
+
 
 
 function validatePhotoPost(object) {
@@ -248,7 +272,6 @@ function validatePhotoPost(object) {
     }
     return true;
 }
-
 
 function include(url) {
     let script = document.createElement('script');

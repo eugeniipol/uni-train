@@ -1,128 +1,132 @@
-const controller = (function () {
-  const logBtn = document.getElementById('log');
-  const logBox = document.getElementById('logInBox');
-  const logText = document.getElementById('logText');
-  const addBox = document.getElementById('addForm');
-  const spanLog = document.getElementsByClassName('close')[0];
-  const spanAdd = document.getElementsByClassName('close')[1];
-  const logIn = document.getElementById('logIn');
-  const account = document.getElementById('account');
-  const addBtn = document.getElementById('add');
-  const addData = document.getElementById('addData');
-  const addAuthor = document.getElementById('author-add');
-  const descriptText = document.getElementById('descriptText');
-  const refresh = document.getElementById('refreshBtn');
-  const load = document.getElementById('load');
-  const addTag = document.getElementById('addTag');
-  const newHashBtn = document.getElementById('newHashtagButton');
-  const newPost = document.getElementById('newPost');
-  const fileChooser = document.getElementById('fileChooser');
-  const repaired = false;
+let controller = (function () {
+    let logBtn = document.getElementById('log');
+    let logBox = document.getElementById('logInBox');
+    let logText = document.getElementById('logText');
+    let addBox = document.getElementById('addForm');
+    let spanLog = document.getElementsByClassName('close')[0];
+    let spanAdd = document.getElementsByClassName('close')[1];
+    let logIn = document.getElementById('logIn');
+    let account = document.getElementById('account');
+    let addBtn = document.getElementById('add');
+    let addData = document.getElementById('addData');
+    let addAuthor = document.getElementById('author-add');
+    let descriptText = document.getElementById("descriptText");
+    let refresh = document.getElementById('refreshBtn');
+    let load = document.getElementById("load");
+    let addTag = document.getElementById("addTag");
+    let newHashBtn = document.getElementById("newHashtagButton");
+    let newPost = document.getElementById("newPost");
+    let fileChooser = document.getElementById("fileChooser");
+    let repaired = false;
 
 
-  const shown = 0;// переменная для отображения показанных постов.
+    let shown = 0;//переменная для отображения показанных постов.
 
 
-  const newMassive = [];
-  const nodes = [];
+    let newMassive = [];
+    let nodes = [];
 
 
-  const hashs = [];// Массив хэшTегов(фильTры) DOM
-  const hashtags = [];// Массив хэштегов JS
-  const hashsAdd = [];// Массив хэштегов для нового фото DOM
-  const hashtagsAdd = [];// Массив хэштегов для нового фото JS
+    let hashs = [];//Массив хэшTегов(фильTры) DOM
+    let hashtags = [];//Массив хэштегов JS
+    let hashsAdd = [];//Массив хэштегов для нового фото DOM
+    let hashtagsAdd = [];//Массив хэштегов для нового фото JS
 
 
-  // Кнопка log in/out
-  logBtn.addEventListener('click', () => {
-    view.pressLog();
-  });
+    //Кнопка log in/out
+    logBtn.addEventListener("click", function () {
+        view.pressLog();
+    });
 
 
-  spanLog.addEventListener('click', () => {
-    view.pressLogCross();
-  });
+    spanLog.addEventListener("click", function () {
+        view.pressLogCross();
+    });
 
 
-  logIn.addEventListener('click', () => {
-    model.getUsersAsync();
-  });
+    logIn.addEventListener("click", function () {
+            let login = document.getElementById("login").value;
+            let password = document.getElementById("password").value;
+            model.getUsersAsync(login, password);
+        }
+    )
 
 
-  // Кнока добавить пост
-  addBtn.addEventListener('click', () => {
-    view.addPostOpen();
-  });
+    //Кнока добавить пост
+    addBtn.addEventListener("click", function () {
+        view.addPostOpen();
+    });
 
 
-  // крест в addPhoto боксе
-  spanAdd.addEventListener('click', () => {
-    view.addPostClose();
-  });
+    //крест в addPhoto боксе
+    spanAdd.addEventListener("click", function () {
+        view.addPostClose();
+    });
 
 
-  // Добавление хэштега в списке фильтров
-  addTag.addEventListener('click', () => {
-    const hashtagsInput = document.getElementById('hashtahgsInput').value;
-    if (hashtags.indexOf(hashtagsInput) === -1) {
-      view.addHashFilter(hashtagsInput);
+    //Добавление хэштега в списке фильтров
+    addTag.addEventListener("click", function () {
+        let hashtagsInput = document.getElementById("hashtahgsInput").value;
+        if (hashtags.indexOf(hashtagsInput) === -1) {
+            view.addHashFilter(hashtagsInput);
+        }
+    });
+
+
+    //Добавление хэштега в создании поста
+    newHashBtn.addEventListener("click", function () {
+        let hashtagsInput = document.getElementById("newHashtag").value;
+        view.createHashtagPost(hashtagsInput);
+    });
+
+
+    load.addEventListener("click", function () {
+        view.showPosts(view.getShown() + 10);
+    });
+
+
+    refresh.addEventListener("click", function () {
+        view.filterPosts();
+    });
+
+
+    newPost.addEventListener("click", function () {
+        if (controller.repaired === false) {
+            let descriptText = document.getElementById("descriptText").value;
+            let createdAt = document.getElementById("addData").textContent;
+            let likes = [];
+            let filePath = "Pictures/" + fileChooser.files[0].name;
+            let formData = new FormData();
+            formData.append('file', fileChooser.files[0]);
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/uploadImage');
+            xhr.send(formData);
+            view.addPhotoPostDom(account.textContent, descriptText, filePath, hashtagsAdd, likes);
+            view.afterLogging();
+            addBox.style.display = "none";
+        }
+        else {
+            let newLink = "";
+            if (fileChooser.files[0] !== undefined) {
+                newLink = "Pictures/" + fileChooser.files[0].name;
+            }
+            else {
+                newLink = templink;
+            }
+            let object = {
+                photolink: newLink,
+                description: descriptText.value,
+                hashtags: hashtagsAdd
+            }
+            view.editPhotoPostDom(tempid, object);
+            view.clearTape();
+            view.showPosts(shown);
+            addBox.style.display = "none";
+            controller.repaired = false;
+        }
+    })
+    return {
+        hashs, hashtags, hashsAdd, hashtagsAdd, repaired //getNewMassive, getNodes, nodes, newMassive
     }
-  });
 
-
-  // Добавление хэштега в создании поста
-  newHashBtn.addEventListener('click', () => {
-    const hashtagsInput = document.getElementById('newHashtag').value;
-    view.createHashtagPost(hashtagsInput);
-  });
-
-
-  load.addEventListener('click', () => {
-    view.showPosts(view.getShown() + 10);
-  });
-
-
-  refresh.addEventListener('click', () => {
-    view.filterPosts();
-  });
-
-
-  newPost.addEventListener('click', () => {
-    if (controller.repaired === false) {
-      const descriptText = document.getElementById('descriptText').value;
-      const createdAt = document.getElementById('addData').textContent;
-      const likes = [];
-      const filePath = `Pictures/${fileChooser.files[0].name}`;
-      const formData = new FormData();
-      formData.append('file', fileChooser.files[0]);
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/uploadImage');
-      xhr.send(formData);
-      view.addPhotoPostDom(account.textContent, descriptText, filePath, hashtagsAdd, likes);
-      view.afterLogging();
-      addBox.style.display = 'none';
-    } else {
-      let newLink = '';
-      if (fileChooser.files[0] !== undefined) {
-        newLink = `Pictures/${fileChooser.files[0].name}`;
-      } else {
-        newLink = templink;
-      }
-      const object = {
-        photolink: newLink,
-        description: descriptText.value,
-        hashtags: hashtagsAdd,
-      };
-      view.editPhotoPostDom(tempid, object);
-      view.clearTape();
-      view.showPosts(shown);
-      addBox.style.display = 'none';
-      controller.repaired = false;
-    }
-  });
-
-
-  return {
-    hashs, hashtags, hashsAdd, hashtagsAdd, repaired, // getNewMassive, getNodes, nodes, newMassive
-  };
-}());
+})()
