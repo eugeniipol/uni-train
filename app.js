@@ -1,56 +1,72 @@
-
 const express = require('express');
-const fs=require('fs');
+const fs = require('fs');
 const app = express();
 const parser = require('body-parser');
+const multer = require('multer');
+
+const upload = multer();
+
 
 app.use(express.static('public'));
 app.use(parser.json());
 
-app.listen(3000, ()=> {
+
+app.listen(3000, () => {
     console.log('request starting...');
 });
 
-//fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
 
-app.get('/getPhotoPost', (req, res)=>{
+app.get('/getUsers', (req, res) => {
+    let users = fs.readFileSync('./server/data/users.json', 'utf8');
+    users ? res.send(users) : res.status(404).end();
+});
+
+
+app.get('/getPhotoPost', (req, res) => {
     let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
-    let post = photoPosts.find((post)=>req.query.id === post.id);
+    let post = photoPosts.find((post) => req.query.id === post.id);
     post ? res.send(post) : res.status(404).end();
 });
 
 
-app.delete('/removePhotoPost', (req, res)=>{
+app.delete('/removePhotoPost', (req, res) => {
     let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
-    for(let i = 0; i < photoPosts.length;i++){
-        if(photoPosts[i].id === req.query.id){
+    for (let i = 0; i < photoPosts.length; i++) {
+        if (photoPosts[i].id === req.query.id) {
             photoPosts[i].del = true;
         }
     }
     fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
-    let post = photoPosts.find((post)=>req.query.id === post.id);
+    let post = photoPosts.find((post) => req.query.id === post.id);
     post ? res.send(post) : res.status(404).end();
 });
 
 
-app.post('/getPhotoPosts', (req,res)=>{
+app.get('/getPhotoPostsAll', (req, res) => {
+    let posts = fs.readFileSync('./server/data/posts.json', 'utf8');
+    posts ? res.send(posts) : res.status(404).end();
+})
+
+
+app.post('/getPhotoPosts', (req, res) => {
     let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
     if (req.query.begin > photoPosts.length) {
         console.log('Overflow');
         return;
     }
+
     let filterConfig = req.body;
-    var newPosts = [];
+    let newPosts = [];
     begin = req.query.begin || 0;
     number = req.query.number || 10;
-    var count = 0;
-    var j = 0;
-    var i = req.query.begin;
+    let count = 0;
+    let j = 0;
+    let i = req.query.begin;
     if (filterConfig) {
         while (i < photoPosts.length && j < number) {
             if (checkFilters(photoPosts[i], filterConfig)) {
-                var temp = {};
-                for (var key in photoPosts[i]) {
+                let temp = {};
+                for (let key in photoPosts[i]) {
                     temp[key] = photoPosts[i][key];
                 }
                 newPosts.push(temp);
@@ -62,8 +78,8 @@ app.post('/getPhotoPosts', (req,res)=>{
     }
     else {
         while (i < photoPosts.length && j < number) {
-            var temp = {};
-            for (var key in photoPosts[i]) {
+            let temp = {};
+            for (let key in photoPosts[i]) {
                 temp[key] = photoPosts[i][key];
             }
             newPosts.push(temp);
@@ -80,13 +96,14 @@ app.post('/getPhotoPosts', (req,res)=>{
 })
 
 
-app.post('/addPhotoPost', (req, res)=>{
+app.post('/addPhotoPost', (req, res) => {
     let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
+    console.log(req.body);
     let element = req.body;
     let date = element.createdAt;
     element.createdAt = new Date(date);
     console.log(date);
-    for (var k = 0; k < photoPosts.length; k++) {
+    for (let k = 0; k < photoPosts.length; k++) {
         if (photoPosts[k].id === element.id) {
             console.log('Element with such ID already exists');
         }
@@ -99,10 +116,22 @@ app.post('/addPhotoPost', (req, res)=>{
 });
 
 
-app.put('/editPhotoPost', (req,res)=>{
+app.post('/likePhotoPost', (req, res) => {
+    let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
+    let temp = {};
+    let requested = photoPosts.find(function (element, index, array) {
+        if (element.id === String(req.query.id)) {
+            photoPosts[index].likes.push(req.query.author);
+            fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
+        }
+    });
+    temp ? res.send(temp) : res.status(404).end()
+})
+
+
+app.put('/editPhotoPost', (req, res) => {
     let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
     let object = req.body;
-    console.log(object);
     let temp = {};
     let requested = photoPosts.find(function (element, index, array) {
         if (element.id === String(req.query.id)) {
@@ -119,9 +148,9 @@ app.put('/editPhotoPost', (req,res)=>{
                     case 'photoLink':
                         temp.description = object.description;
                         break;
-                    case 'Hashtags':
-                        //console.log('Asd');
-                        temp.hashtags = object.Hashtags;
+                    case 'hashtags':
+                        console.log('Asd');
+                        temp.hashtags = object.hashtags;
                 }
             }
             if (validatePhotoPost(temp) === true) {
@@ -132,6 +161,11 @@ app.put('/editPhotoPost', (req,res)=>{
     });
     temp ? res.send(temp) : res.status(404).end()
 })
+
+
+app.post('/uploadImage', upload.single('file'), (req, res) => {
+    fs.writeFile('Public/Pictures/' + req.file.originalname, req.file.buffer);
+});
 
 
 function checkFilters(element, filters) {
@@ -149,6 +183,7 @@ function checkFilters(element, filters) {
     }
     return true;
 }
+
 
 function validatePhotoPost(object) {
     if (!object.id) {
@@ -179,7 +214,7 @@ function validatePhotoPost(object) {
         console.log("Absent 'photolink' field")
         return false;
     }
-    for (var key in object) {
+    for (let key in object) {
         switch (key) {
             case 'id':
                 if (typeof object.id !== 'string') {
@@ -216,8 +251,9 @@ function validatePhotoPost(object) {
 
 
 function include(url) {
-    var script = document.createElement('script');
+    let script = document.createElement('script');
     script.src = url;
     document.getElementsByTagName('head')[0].appendChild(script);
 }
+
 console.log("server running at 'localhost:3000'");

@@ -8,12 +8,6 @@ http.createServer(function (request, response) {
     if (request.url === "/"){
         filePath = './public/index.html';
     }
-    else if (request.url.startsWith ('/Pictures')){
-        filePath = "./public" + request.url;
-    }
-    else if (request.url.startsWith ('/Styles')){
-        filePath = "./public" + request.url;
-    }
     else{
         filePath = "./public" + request.url;
     }
