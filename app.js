@@ -45,15 +45,21 @@ app.get('/getPhotoPost', (req, res) => {
 
 
 app.delete('/removePhotoPost', (req, res) => {
-    let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
-    for (let i = 0; i < photoPosts.length; i++) {
-        if (photoPosts[i].id === req.query.id) {
-            photoPosts[i].del = true;
+    if(req.user) {
+        console.log("Autorizated");
+        let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
+        for (let i = 0; i < photoPosts.length; i++) {
+            if (photoPosts[i].id === req.query.id) {
+                photoPosts[i].del = true;
+            }
         }
+        fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
+        let post = photoPosts.find((post) => req.query.id === post.id);
+        post ? res.send(post) : res.status(404).end();
     }
-    fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
-    let post = photoPosts.find((post) => req.query.id === post.id);
-    post ? res.send(post) : res.status(404).end();
+    else{
+        console.log("User hasn't autorizated!");
+    }
 });
 
 
@@ -112,75 +118,99 @@ app.post('/getPhotoPosts', (req, res) => {
 
 
 app.post('/addPhotoPost', (req, res) => {
-    let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
-    console.log(req.body);
-    let element = req.body;
-    let date = element.createdAt;
-    element.createdAt = new Date(date);
-    console.log(date);
-    for (let k = 0; k < photoPosts.length; k++) {
-        if (photoPosts[k].id === element.id) {
-            console.log('Element with such ID already exists');
+    if(req.user) {
+        let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
+        console.log(req.body);
+        let element = req.body;
+        let date = element.createdAt;
+        element.createdAt = new Date(date);
+        console.log(date);
+        for (let k = 0; k < photoPosts.length; k++) {
+            if (photoPosts[k].id === element.id) {
+                console.log('Element with such ID already exists');
+            }
         }
+        if (validatePhotoPost(element) === true) {
+            photoPosts.push(element);
+            fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
+        }
+        res.status(200).end();
     }
-    if (validatePhotoPost(element) === true) {
-        photoPosts.push(element);
-        fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
+    else{
+        console.log("User hasn't autorizated!");
     }
-    res.status(200).end();
 });
 
 
 app.post('/likePhotoPost', (req, res) => {
-    let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
-    let temp = {};
-    let requested = photoPosts.find(function (element, index, array) {
-        if (element.id === String(req.query.id)) {
-            photoPosts[index].likes.push(req.query.author);
-            fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
-        }
-    });
-    temp ? res.send(temp) : res.status(404).end()
+    if(req.user) {
+        let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
+        let temp = {};
+        let requested = photoPosts.find(function (element, index, array) {
+            if (element.id === String(req.query.id)) {
+                photoPosts[index].likes.push(req.query.author);
+                fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
+            }
+        });
+        temp ? res.send(temp) : res.status(404).end()
+    }
+    else{
+        console.log("User hasn't autorizated!");
+    }
 })
 
 
 app.put('/editPhotoPost', (req, res) => {
-    let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
-    let object = req.body;
-    let temp = {};
-    let requested = photoPosts.find(function (element, index, array) {
-        if (element.id === String(req.query.id)) {
-            for (let key in element) {
-                temp[key] = element[key];
-            }
-            let tempDate = temp.createdAt;
-            temp.createdAt = new Date(tempDate);
-            for (let key in object) {
-                switch (key) {
-                    case 'description':
-                        temp.description = object.description;
-                        break;
-                    case 'photoLink':
-                        temp.description = object.description;
-                        break;
-                    case 'hashtags':
-                        console.log('Asd');
-                        temp.hashtags = object.hashtags;
+    if(req.user) {
+        let photoPosts = JSON.parse(fs.readFileSync('./server/data/posts.json', 'utf8'));
+        let object = req.body;
+        let temp = {};
+        let requested = photoPosts.find(function (element, index, array) {
+            if (element.id === String(req.query.id)) {
+                for (let key in element) {
+                    temp[key] = element[key];
+                }
+                let tempDate = temp.createdAt;
+                temp.createdAt = new Date(tempDate);
+                for (let key in object) {
+                    switch (key) {
+                        case 'description':
+                            temp.description = object.description;
+                            break;
+                        case 'photoLink':
+                            temp.description = object.description;
+                            break;
+                        case 'hashtags':
+                            console.log('Asd');
+                            temp.hashtags = object.hashtags;
+                    }
+                }
+                if (validatePhotoPost(temp) === true) {
+                    photoPosts[index] = temp;
+                    fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
                 }
             }
-            if (validatePhotoPost(temp) === true) {
-                photoPosts[index] = temp;
-                fs.writeFileSync('./server/data/posts.json', JSON.stringify(photoPosts));
-            }
-        }
-    });
-    temp ? res.send(temp) : res.status(404).end()
+        });
+        temp ? res.send(temp) : res.status(404).end()
+    }
+    else{
+        console.log("User hasn't autorizated!");
+    }
 })
 
 
 app.post('/uploadImage', upload.single('file'), (req, res) => {
     fs.writeFile('Public/Pictures/' + req.file.originalname, req.file.buffer);
 });
+
+
+const mustBeAuthenticated = function(req, res, next) {
+    if (req.isAuthenticated()) {
+        //next();
+    } else {
+        res.redirect('/');
+    }
+};
 
 
 app.post('/login', passport.authenticate('local'), function (req,res) {

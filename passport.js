@@ -7,7 +7,6 @@ const user = {
     "password": '1'
 }
 
-
 let cryptUsers = [];
 const users = [
     {
